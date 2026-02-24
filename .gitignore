@@ -166,4 +166,7 @@ fabric.properties
 # Local History for Visual Studio Code
 .history/
 
+# Agent
+agent.md
+
 # End of https://mrkandreev.name/snippets/gitignore-generator/#macOS,Windows,PhpStorm,VisualStudioCode
