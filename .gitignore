@@ -167,6 +167,6 @@ fabric.properties
 .history/
 
 # Agent
-agent.md
+AGENTS.md
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#macOS,Windows,PhpStorm,VisualStudioCode
