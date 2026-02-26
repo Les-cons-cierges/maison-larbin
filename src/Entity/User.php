@@ -64,6 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->requetes = new ArrayCollection();
         $this->requetesAssignee = new ArrayCollection();
+
         $now = new \DateTimeImmutable();
         $this->created_at = $now;
         $this->updated_at = $now;
