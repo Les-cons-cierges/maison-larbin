@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -33,6 +35,27 @@ class User
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Entreprise $entreprise = null;
+
+    /**
+     * @var Collection<int, Requete>
+     */
+    #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'auteur')]
+    private Collection $requetes;
+
+    /**
+     * @var Collection<int, Requete>
+     */
+    #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'assignee')]
+    private Collection $requetesAssignee;
+
+    public function __construct()
+    {
+        $this->requetes = new ArrayCollection();
+        $this->requetesAssignee = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +142,78 @@ class User
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): static
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requete>
+     */
+    public function getRequetes(): Collection
+    {
+        return $this->requetes;
+    }
+
+    public function addRequete(Requete $requete): static
+    {
+        if (!$this->requetes->contains($requete)) {
+            $this->requetes->add($requete);
+            $requete->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequete(Requete $requete): static
+    {
+        if ($this->requetes->removeElement($requete)) {
+            // set the owning side to null (unless already changed)
+            if ($requete->getAuteur() === $this) {
+                $requete->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requete>
+     */
+    public function getRequetesAssignee(): Collection
+    {
+        return $this->requetesAssignee;
+    }
+
+    public function addRequetesAssignee(Requete $requetesAssignee): static
+    {
+        if (!$this->requetesAssignee->contains($requetesAssignee)) {
+            $this->requetesAssignee->add($requetesAssignee);
+            $requetesAssignee->setAssignee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequetesAssignee(Requete $requetesAssignee): static
+    {
+        if ($this->requetesAssignee->removeElement($requetesAssignee)) {
+            // set the owning side to null (unless already changed)
+            if ($requetesAssignee->getAssignee() === $this) {
+                $requetesAssignee->setAssignee(null);
+            }
+        }
 
         return $this;
     }

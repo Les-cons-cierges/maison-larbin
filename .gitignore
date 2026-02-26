@@ -27,6 +27,10 @@
 
 ### perso
 
+migrations
+/migrations*
+/migrations
+
 # General
 .DS_Store
 .AppleDouble
