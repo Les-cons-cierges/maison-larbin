@@ -32,6 +32,13 @@
 .AppleDouble
 .LSOverride
 
+
+
+# Migrations
+/migrations*
+/migrations/*
+/migrations
+
 # Icon must end with two \r
 Icon
 
@@ -165,5 +172,8 @@ fabric.properties
 
 # Local History for Visual Studio Code
 .history/
+
+# Agent
+AGENTS.md
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#macOS,Windows,PhpStorm,VisualStudioCode
