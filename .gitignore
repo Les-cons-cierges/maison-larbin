@@ -27,9 +27,9 @@
 
 ### perso
 
-migrations
-/migrations*
-/migrations
+#migrations
+#/migrations*
+#/migrations
 
 # General
 .DS_Store
