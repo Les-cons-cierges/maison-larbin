@@ -180,3 +180,12 @@ fabric.properties
 AGENTS.md
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#macOS,Windows,PhpStorm,VisualStudioCode
+
+# Node module
+
+node_modules/
+node_modules
+node_modules/*
+/node_modules/
+/node_modules
+/node_modules/*
