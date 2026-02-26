@@ -1,8 +1,12 @@
+import ASCIIText from "./ASCIIText";
+import NavBar from "./Navbar/NavBar";
+
 const Home = ({ title, username, cityCount }) => (// ou props
-    <div>
+    <>
+        <NavBar/>
         <h2>{title}</h2>{/* et props.title ... */}
         <p>Bienvenue {username}</p>
         <p>Nombre de villes chargees: {cityCount}</p>
-    </div>
+    </>
 );
 export default Home;

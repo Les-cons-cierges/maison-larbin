@@ -25,7 +25,9 @@
         "vite": "^7.3.1"
     },
     "dependencies": {
+        "hamburgers": "^1.2.1",
         "react": "^19.2.4",
-        "react-dom": "^19.2.4"
+        "react-dom": "^19.2.4",
+        "three": "^0.167.1"
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./components/App";
-import Home from "./components/Home";
+import App from "./component/App";
+import Home from "./component/Home";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
