@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription entreprise{% endblock %}
+
+{% block body %}
+    <h1>Inscription entreprise</h1>
+
+    {% for message in app.flashes('success') %}
+        <div>{{ message }}</div>
+    {% endfor %}
+
+    {% if errors[0] is defined %}
+        <ul>
+            <li>{{ errors[0] }}</li>
+        </ul>
+    {% endif %}
+
+    <form method="post" id="entreprise-registration-form" autocomplete="off">
+        <input type="hidden" name="_token" value="{{ csrf_token('register_entreprise') }}">
+
+        <div>
+            <label for="nom">Nom de l'entreprise</label>
+            <input id="nom" name="nom" type="text" value="{{ values.nom|default('') }}">
+            {% if errors.nom is defined %}<div>{{ errors.nom }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="siret">SIRET</label>
+            <input id="siret" name="siret" type="text" value="{{ values.siret|default('') }}">
+            {% if errors.siret is defined %}<div>{{ errors.siret }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="adresse">Adresse</label>
+            <input id="adresse" name="adresse" type="text" value="{{ values.adresse|default('') }}">
+            {% if errors.adresse is defined %}<div>{{ errors.adresse }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="code_postal">Code postal</label>
+            <input id="code_postal" name="code_postal" type="text" value="{{ values.code_postal|default('') }}">
+            {% if errors.code_postal is defined %}<div>{{ errors.code_postal }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="ville">Ville</label>
+            <input id="ville" name="ville" type="text" value="{{ values.ville|default('') }}">
+            {% if errors.ville is defined %}<div>{{ errors.ville }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="pays">Pays</label>
+            <input id="pays" name="pays" type="text" value="{{ values.pays|default('') }}">
+            {% if errors.pays is defined %}<div>{{ errors.pays }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" name="telephone" type="text" value="{{ values.telephone|default('') }}">
+            {% if errors.telephone is defined %}<div>{{ errors.telephone }}</div>{% endif %}
+        </div>
+
+        <div>
+            <label for="type_abonnement">Type d'abonnement</label>
+            <select id="type_abonnement" name="type_abonnement">
+                <option value="">Choisir un abonnement</option>
+                {% for abonnement in abonnementChoices %}
+                    <option value="{{ abonnement }}" {% if values.type_abonnement|default('') == abonnement %}selected{% endif %}>
+                        {{ abonnement|replace({'_': ' '})|title }}
+                    </option>
+                {% endfor %}
+            </select>
+            {% if errors.type_abonnement is defined %}<div>{{ errors.type_abonnement }}</div>{% endif %}
+        </div>
+
+        <button type="submit">Créer l'entreprise</button>
+    </form>
+
+    <script>
+        const navEntry = window.performance?.getEntriesByType?.('navigation')?.[0];
+        const isReload = navEntry && navEntry.type === 'reload';
+
+        if (isReload) {
+            const form = document.getElementById('entreprise-registration-form');
+            if (form) {
+                form.reset();
+            }
+        }
+    </script>
+{% endblock %}
