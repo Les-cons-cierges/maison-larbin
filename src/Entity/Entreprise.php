@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
@@ -42,6 +44,24 @@ class Entreprise
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'entreprise')]
+    private Collection $users;
+
+    /**
+     * @var Collection<int, Requete>
+     */
+    #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'entreprise')]
+    private Collection $requetes;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->requetes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -164,6 +184,66 @@ class Entreprise
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getEntreprise() === $this) {
+                $user->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requete>
+     */
+    public function getRequetes(): Collection
+    {
+        return $this->requetes;
+    }
+
+    public function addRequete(Requete $requete): static
+    {
+        if (!$this->requetes->contains($requete)) {
+            $this->requetes->add($requete);
+            $requete->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequete(Requete $requete): static
+    {
+        if ($this->requetes->removeElement($requete)) {
+            // set the owning side to null (unless already changed)
+            if ($requete->getEntreprise() === $this) {
+                $requete->setEntreprise(null);
+            }
+        }
 
         return $this;
     }

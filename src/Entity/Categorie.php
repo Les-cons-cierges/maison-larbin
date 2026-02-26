@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Categorie
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
+
+    /**
+     * @var Collection<int, Requete>
+     */
+    #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'categorie')]
+    private Collection $requetes;
+
+    public function __construct()
+    {
+        $this->requetes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class Categorie
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Requete>
+     */
+    public function getRequetes(): Collection
+    {
+        return $this->requetes;
+    }
+
+    public function addRequete(Requete $requete): static
+    {
+        if (!$this->requetes->contains($requete)) {
+            $this->requetes->add($requete);
+            $requete->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequete(Requete $requete): static
+    {
+        if ($this->requetes->removeElement($requete)) {
+            // set the owning side to null (unless already changed)
+            if ($requete->getCategorie() === $this) {
+                $requete->setCategorie(null);
+            }
+        }
 
         return $this;
     }

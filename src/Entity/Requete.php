@@ -15,7 +15,7 @@ class Requete
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -32,19 +32,34 @@ class Requete
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'requetes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $auteur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'requetes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Entreprise $entreprise = null;
+
+    #[ORM\ManyToOne(inversedBy: 'requetes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'requetesAssignee')]
+    private ?User $assignee = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getTitre(): ?string
     {
-        return $this->nom;
+        return $this->titre;
     }
 
-    public function setNom(string $nom): static
+    public function setTitre(string $titre): static
     {
-        $this->nom = $nom;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -105,6 +120,54 @@ class Requete
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): static
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): static
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getAssignee(): ?User
+    {
+        return $this->assignee;
+    }
+
+    public function setAssignee(?User $assignee): static
+    {
+        $this->assignee = $assignee;
 
         return $this;
     }
