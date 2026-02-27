@@ -3,11 +3,19 @@ import { createRoot } from "react-dom/client";
 import App from "./component/App";
 import Home from "./component/Home";
 import NotFound from "./component/NotFound/NotFound";
+import NavBar from "./component/Navbar/NavBar";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
     createRoot(appContainer).render(<App />);
 }
+
+
+const navbarContainer = document.getElementById("navbar");
+if (navbarContainer) {
+    createRoot(navbarContainer).render(<NavBar/>);
+}
+
 
 const homeContainer = document.getElementById("home");
 if (homeContainer) {
