@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix de l'offre{% endblock %}
+
+{% block body %}
+    <h1>Choisir une offre</h1>
+
+    <p>Entreprise: {{ entreprise.nom }}</p>
+
+    {% if error %}
+        <div>{{ error }}</div>
+    {% endif %}
+
+    {% for message in app.flashes('success') %}
+        <div>{{ message }}</div>
+    {% endfor %}
+
+    <form method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token('choose_offer_' ~ entreprise.id) }}">
+
+        {% for abonnement in abonnementChoices %}
+            <div>
+                <label>
+                    <input
+                        type="radio"
+                        name="type_abonnement"
+                        value="{{ abonnement }}"
+                        {% if selected == abonnement %}checked{% endif %}
+                        required
+                    >
+                    {{ abonnement|replace({'_': ' '})|title }}
+                </label>
+            </div>
+        {% endfor %}
+
+        <button type="submit">Enregistrer l'offre</button>
+    </form>
+{% endblock %}
