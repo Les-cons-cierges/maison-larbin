@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@import "../../node_modules/hamburgers/dist/hamburgers.min.css";
+
 /* ── Made Mirage ── */
 @font-face {
     font-family: 'Made Mirage';
@@ -89,28 +92,25 @@
 }
 
 :root {
-    --color : #1b475d;
-    --color-bg : #1b475d;
-}
+    /* main color */
+    --color-bleu : #1b475d;
 
+    /* employe color */
+    --color-jaune-employe : #fad564;
+    --color-orange-employe : #e76f51;
 
-*,
-*::before,
-*::after {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+    /* cadres color */
+    --color-vert-cadre : #8ebd9d;
+    --color-bleu-cadre : #5fa8d3;
 
-ul {
-    list-style-type: none;
-    display: flex;
-    gap: 2rem;
-}
+    /* direction color */
+    --color-beige-direction : #8ebd9d;
+    --color-bordeau-direction : #5fa8d3;
 
-a {
-    text-decoration: none;
-    color: black;
+    /* maison larbin color */
+    --color-vert-maison-larbin : #d3dc7c;
+    --color-vert-kaki-maison-larbin : #aab18b;
+
 }
 
 html {
@@ -124,4 +124,9 @@ h4,
 h5,
 h6 {
     font-family: 'Made Mirage', serif;
+}
+
+
+@media screen and(max-width: 700px){
+
 }
