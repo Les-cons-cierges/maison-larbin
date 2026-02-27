@@ -36,7 +36,7 @@ class Entreprise
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $type_abonnement = null;
 
     #[ORM\Column]
@@ -45,11 +45,8 @@ class Entreprise
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'entreprise')]
-    private Collection $users;
+    #[ORM\ManyToOne(inversedBy: 'entreprises')]
+    private ?User $owner = null;
 
     /**
      * @var Collection<int, Requete>
@@ -59,7 +56,6 @@ class Entreprise
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->requetes = new ArrayCollection();
     }
 
@@ -157,7 +153,7 @@ class Entreprise
         return $this->type_abonnement;
     }
 
-    public function setTypeAbonnement(string $type_abonnement): static
+    public function setTypeAbonnement(?string $type_abonnement): static
     {
         $this->type_abonnement = $type_abonnement;
 
@@ -188,32 +184,14 @@ class Entreprise
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getOwner(): ?User
     {
-        return $this->users;
+        return $this->owner;
     }
 
-    public function addUser(User $user): static
+    public function setOwner(?User $owner): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getEntreprise() === $this) {
-                $user->setEntreprise(null);
-            }
-        }
+        $this->owner = $owner;
 
         return $this;
     }
