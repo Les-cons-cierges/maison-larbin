@@ -42,9 +42,9 @@ const NavBar = () => {
                 <div className="flex items-center gap-4">
                     {/* Liens auth — cachés sur mobile */}
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                        <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
                         <li>
-                            <a href="#" className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                            <a href="/register" className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
                                 S'inscrire
                             </a>
                         </li>
@@ -70,9 +70,9 @@ const NavBar = () => {
                         <li><a href="#" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                     <ul className="flex flex-col gap-3 list-none">
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                        <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
                         <li>
-                            <a href="#" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
+                            <a href="/register" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
                         </li>
                     </ul>
                 </div>
