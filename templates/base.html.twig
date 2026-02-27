@@ -7,15 +7,16 @@
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
     {# scripts d'integration de vite/react dans base twig #}
+    {% set vite_url = app.request.server.get('VITE_SERVER_URL') ?? 'http://localhost:5173' %}
     <script type="module">
-        import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+        import RefreshRuntime from '{{ vite_url }}/@react-refresh'
         RefreshRuntime.injectIntoGlobalHook(window)
         window.$RefreshReg$ = () => {}
         window.$RefreshSig$ = () => (type) => type
         window.__vite_plugin_react_preamble_installed__ = true
     </script>
-    <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/main.jsx"></script>
+    <script type="module" src="{{ vite_url }}/@vite/client"></script>
+    <script type="module" src="{{ vite_url }}/main.jsx"></script>
 
     {% block stylesheets %}
     {% endblock %}
