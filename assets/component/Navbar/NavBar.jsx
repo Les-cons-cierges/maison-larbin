@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import logo from '../../img/logo2.png';
 import './Navbar.css';
 import '../../styles/app.css';
@@ -26,12 +26,15 @@ const NavBar = () => {
 
                 {/* Logo */}
                 <div>
-                    <img src={logo} alt="logo" className="w-28" />
+                    <a href="/">
+                        <img src={logo} alt="logo" className="w-28"/>
+                    </a>
                 </div>
 
                 {/* Menu principal — caché sur mobile */}
                 <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
+                        <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
                         <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
                         <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
                         <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
@@ -44,7 +47,8 @@ const NavBar = () => {
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
                         <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
                         <li>
-                            <a href="/register" className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                            <a href="/register"
+                               className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
                                 S'inscrire
                             </a>
                         </li>
@@ -65,6 +69,7 @@ const NavBar = () => {
             {isOpen && (
                 <div className="px-12 pb-4 flex flex-col gap-4">
                     <ul className="flex flex-col gap-3 list-none">
+                        <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
                         <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
                         <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
                         <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
@@ -72,7 +77,8 @@ const NavBar = () => {
                     <ul className="flex flex-col gap-3 list-none">
                         <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
                         <li>
-                            <a href="/register" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
+                            <a href="/register"
+                               className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
                         </li>
                     </ul>
                 </div>
