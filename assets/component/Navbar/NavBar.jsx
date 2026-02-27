@@ -32,9 +32,9 @@ const NavBar = () => {
                 {/* Menu principal — caché sur mobile */}
                 <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Services</a></li>
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">À propos</a></li>
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Contact</a></li>
+                        <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
+                        <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
+                        <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                 </div>
 
@@ -65,9 +65,9 @@ const NavBar = () => {
             {isOpen && (
                 <div className="px-12 pb-4 flex flex-col gap-4">
                     <ul className="flex flex-col gap-3 list-none">
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Services</a></li>
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">À propos</a></li>
-                        <li><a href="#" className="hover:opacity-75 transition-opacity">Contact</a></li>
+                        <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
+                        <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
+                        <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                     <ul className="flex flex-col gap-3 list-none">
                         <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
