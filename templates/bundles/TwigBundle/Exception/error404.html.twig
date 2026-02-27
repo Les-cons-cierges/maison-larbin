@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            background-color: #000;
+        }
+    </style>
+    {# block d'insertion du component Home (le script est dans base.html.twig et main.jsx) #}
+    {# passage des données php sous forme de dataset js (data-props) et encodées en json #}
+    <div id="error404"></div>
+{% endblock %}

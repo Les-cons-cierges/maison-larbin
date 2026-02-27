@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./component/App";
 import Home from "./component/Home";
+import NotFound from "./component/NotFound/NotFound";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
@@ -23,4 +24,9 @@ if (homeContainer) {
     }
     // passage de données en props pures
     createRoot(homeContainer).render(<Home {...homeProps} />);
+}
+
+const error404Container = document.getElementById("error404");
+if (error404Container) {
+    createRoot(error404Container).render(< NotFound/>);
 }
