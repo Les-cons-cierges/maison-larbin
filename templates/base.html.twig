@@ -27,22 +27,7 @@
 </head>
 
 <body>
-{% if app.user %}
-    <div>
-        <span>Connecté: {{ app.user.userIdentifier }}</span>
-        <form method="post" action="{{ path('app_logout') }}">
-            <button type="submit">Déconnexion</button>
-        </form>
-    </div>
-{% else %}
-    <div>
-        <a href="{{ path('app_login') }}">Connexion</a>
-        <a href="{{ path('app_register') }}">Inscription</a>
-    </div>
-{% endif %}
-{# injectez vos components ou vous voullez (celui-ci est pour le test)
-    le prochain se trouve dans home
-#}
+
 <div id="app"></div>
 {% block body %}{% endblock %}
 </body>
