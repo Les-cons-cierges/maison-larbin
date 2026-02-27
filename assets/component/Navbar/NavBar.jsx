@@ -30,7 +30,7 @@ const NavBar = () => {
                 </div>
 
                 {/* Menu principal — caché sur mobile */}
-                <div className="hidden md:flex">
+                <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
                         <li><a href="#" className="hover:opacity-75 transition-opacity">Services</a></li>
                         <li><a href="#" className="hover:opacity-75 transition-opacity">À propos</a></li>
@@ -41,7 +41,7 @@ const NavBar = () => {
                 {/* Auth + hamburger */}
                 <div className="flex items-center gap-4">
                     {/* Liens auth — cachés sur mobile */}
-                    <ul className="hidden md:flex gap-4 list-none items-center">
+                    <ul className="max-lg:hidden flex gap-4 list-none items-center">
                         <li><a href="#" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
                         <li>
                             <a href="#" className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
@@ -51,7 +51,7 @@ const NavBar = () => {
                     </ul>
 
                     {/* Hamburger librairie — visible sur mobile uniquement */}
-                    <div className="max-lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+                    <div className="min-lg:hidden" onClick={() => setIsOpen(!isOpen)}>
                         <div className="hamburger hamburger--3dx">
                             <div className="hamburger-box">
                                 <div className="hamburger-inner"></div>

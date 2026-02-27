@@ -1,5 +1,5 @@
-import ASCIIText from "./ASCIIText";
 import NavBar from "./Navbar/NavBar";
+import NotFound from "./NotFound/NotFound";
 
 const Home = ({ title, username, cityCount }) => (// ou props
     <>
