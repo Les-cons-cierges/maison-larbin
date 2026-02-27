@@ -60,20 +60,7 @@
             {% if errors.telephone is defined %}<div>{{ errors.telephone }}</div>{% endif %}
         </div>
 
-        <div>
-            <label for="type_abonnement">Type d'abonnement</label>
-            <select id="type_abonnement" name="type_abonnement">
-                <option value="">Choisir un abonnement</option>
-                {% for abonnement in abonnementChoices %}
-                    <option value="{{ abonnement }}" {% if values.type_abonnement|default('') == abonnement %}selected{% endif %}>
-                        {{ abonnement|replace({'_': ' '})|title }}
-                    </option>
-                {% endfor %}
-            </select>
-            {% if errors.type_abonnement is defined %}<div>{{ errors.type_abonnement }}</div>{% endif %}
-        </div>
-
-        <button type="submit">Créer l'entreprise</button>
+        <button type="submit">Continuer vers le choix de l'offre</button>
     </form>
 
     <script>

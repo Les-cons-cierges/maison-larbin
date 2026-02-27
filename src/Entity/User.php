@@ -45,8 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?Entreprise $entreprise = null;
+    /**
+     * @var Collection<int, Entreprise>
+     */
+    #[ORM\OneToMany(targetEntity: Entreprise::class, mappedBy: 'owner')]
+    private Collection $entreprises;
 
     /**
      * @var Collection<int, Requete>
@@ -62,6 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->entreprises = new ArrayCollection();
         $this->requetes = new ArrayCollection();
         $this->requetesAssignee = new ArrayCollection();
 
@@ -172,14 +176,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEntreprise(): ?Entreprise
+    /**
+     * @return Collection<int, Entreprise>
+     */
+    public function getEntreprises(): Collection
     {
-        return $this->entreprise;
+        return $this->entreprises;
     }
 
-    public function setEntreprise(?Entreprise $entreprise): static
+    public function addEntreprise(Entreprise $entreprise): static
     {
-        $this->entreprise = $entreprise;
+        if (!$this->entreprises->contains($entreprise)) {
+            $this->entreprises->add($entreprise);
+            $entreprise->setOwner($this);
+        }
+ 
+        return $this;
+    }
+
+    public function removeEntreprise(Entreprise $entreprise): static
+    {
+        if ($this->entreprises->removeElement($entreprise)) {
+            if ($entreprise->getOwner() === $this) {
+                $entreprise->setOwner(null);
+            }
+        }
 
         return $this;
     }
