@@ -29,7 +29,7 @@ function BuildingIcon() {
     );
 }
 
-export function PricingCard({
+export function PricingCard ({
     name = "PME",
     employeesLabel = "1 à 50 employés",
     subtitle = "Idéal pour les petites et moyennes structures",
