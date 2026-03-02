@@ -63,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'assignee')]
     private Collection $requetesAssignee;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Entreprise $idEntreprise = null;
+
     public function __construct()
     {
         $this->entreprises = new ArrayCollection();
@@ -259,6 +262,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $requetesAssignee->setAssignee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdEntreprise(): ?Entreprise
+    {
+        return $this->idEntreprise;
+    }
+
+    public function setIdEntreprise(?Entreprise $idEntreprise): static
+    {
+        $this->idEntreprise = $idEntreprise;
 
         return $this;
     }
