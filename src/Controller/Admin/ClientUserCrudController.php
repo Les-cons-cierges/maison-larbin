@@ -15,7 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
-class UserCrudController extends AbstractCrudController
+class ClientUserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {

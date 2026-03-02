@@ -4,6 +4,7 @@ framework:
         paths:
             - assets/
         excluded_patterns:
+            # Front CSS is handled by Vite/Tailwind, not Symfony AssetMapper.
             - '*/styles/app.css'
         missing_import_mode: strict
 
