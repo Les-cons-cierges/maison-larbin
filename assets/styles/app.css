@@ -91,26 +91,25 @@
     font-display: swap;
 }
 
-:root {
+@theme {
     /* main color */
-    --color-bleu : #1b475d;
+    --color-bleu: #1b475d;
 
     /* employe color */
-    --color-jaune-employe : #fad564;
-    --color-orange-employe : #e76f51;
+    --color-jaune-employe: #fad564;
+    --color-orange-employe: #e76f51;
 
     /* cadres color */
-    --color-vert-cadre : #8ebd9d;
-    --color-bleu-cadre : #5fa8d3;
+    --color-vert-cadre: #8ebd9d;
+    --color-bleu-cadre: #5fa8d3;
 
     /* direction color */
-    --color-beige-direction : #8ebd9d;
-    --color-bordeau-direction : #5fa8d3;
+    --color-beige-direction: #8ebd9d;
+    --color-bordeau-direction: #5fa8d3;
 
     /* maison larbin color */
-    --color-vert-maison-larbin : #d3dc7c;
-    --color-vert-kaki-maison-larbin : #aab18b;
-
+    --color-vert-maison-larbin: #d3dc7c;
+    --color-vert-kaki-maison-larbin: #aab18b;
 }
 
 html {
