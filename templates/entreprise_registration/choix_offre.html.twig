@@ -3,36 +3,181 @@
 {% block title %}Choix de l'offre{% endblock %}
 
 {% block body %}
-    <h1>Choisir une offre</h1>
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
 
-    <p>Entreprise: {{ entreprise.nom }}</p>
+        .login-card {
+            width: 100%;
+            max-width: 940px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
 
-    {% if error %}
-        <div>{{ error }}</div>
-    {% endif %}
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
 
-    {% for message in app.flashes('success') %}
-        <div>{{ message }}</div>
-    {% endfor %}
+        .login-subtitle {
+            margin: 0.5rem 0 1.4rem;
+            color: #64748b;
+        }
 
-    <form method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token('choose_offer_' ~ entreprise.id) }}">
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
 
-        {% for abonnement in abonnementChoices %}
-            <div>
-                <label>
-                    <input
-                        type="radio"
-                        name="type_abonnement"
-                        value="{{ abonnement }}"
-                        {% if selected == abonnement %}checked{% endif %}
-                        required
-                    >
-                    {{ abonnement|replace({'_': ' '})|title }}
-                </label>
-            </div>
-        {% endfor %}
+        .login-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-bleu);
+        }
 
-        <button type="submit">Enregistrer l'offre</button>
-    </form>
+        .login-btn:hover {
+            opacity: 0.92;
+        }
+
+        .login-error {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-success {
+            border: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            color: #166534;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .offer-option {
+            position: relative;
+        }
+
+        .offer-radio {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .offer-card {
+            display: block;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 1rem;
+            cursor: pointer;
+            background: #fff;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+            min-height: 140px;
+        }
+
+        .offer-card:hover {
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+        }
+
+        .offer-radio:checked + .offer-card {
+            border-color: var(--color-bleu);
+            box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+            background: #f8fbfd;
+        }
+
+        .offer-name {
+            display: block;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .offer-desc {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .form-actions {
+            margin-top: 1.1rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        @media (max-width: 900px) {
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Choisir une offre</h1>
+            <p class="login-subtitle">Entreprise: {{ entreprise.nom }}</p>
+
+            {% if error %}
+                <div class="login-error">{{ error }}</div>
+            {% endif %}
+
+            {% for message in app.flashes('success') %}
+                <div class="login-success">{{ message }}</div>
+            {% endfor %}
+
+            <form method="post" class="login-form">
+                <input type="hidden" name="_token" value="{{ csrf_token('choose_offer_' ~ entreprise.id) }}">
+
+                <div class="offers-grid">
+                    {% for abonnement in abonnementChoices %}
+                        <div class="offer-option">
+                            <input
+                                class="offer-radio"
+                                type="radio"
+                                id="offre_{{ loop.index }}"
+                                name="type_abonnement"
+                                value="{{ abonnement }}"
+                                {% if selected == abonnement %}checked{% endif %}
+                                required
+                            >
+                            <label class="offer-card" for="offre_{{ loop.index }}">
+                                <span class="offer-name">{{ abonnement|replace({'_': ' '})|title }}</span>
+                                <p class="offer-desc">Une formule pensée pour votre entreprise, avec un accompagnement adapté à ce niveau d'abonnement.</p>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-actions">
+                    <button class="login-btn" type="submit">Enregistrer l'offre</button>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock %}

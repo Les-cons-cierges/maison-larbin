@@ -3,65 +3,170 @@
 {% block title %}Inscription entreprise{% endblock %}
 
 {% block body %}
-    <h1>Inscription entreprise</h1>
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
 
-    {% for message in app.flashes('success') %}
-        <div>{{ message }}</div>
-    {% endfor %}
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
 
-    {% if errors[0] is defined %}
-        <ul>
-            <li>{{ errors[0] }}</li>
-        </ul>
-    {% endif %}
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
 
-    <form method="post" id="entreprise-registration-form" autocomplete="off">
-        <input type="hidden" name="_token" value="{{ csrf_token('register_entreprise') }}">
+        .login-subtitle {
+            margin: 0.5rem 0 1.4rem;
+            color: #64748b;
+        }
 
-        <div>
-            <label for="nom">Nom de l'entreprise</label>
-            <input id="nom" name="nom" type="text" value="{{ values.nom|default('') }}">
-            {% if errors.nom is defined %}<div>{{ errors.nom }}</div>{% endif %}
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .login-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 0.75rem 0.9rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: var(--color-bleu);
+            box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+        }
+
+        .login-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-bleu);
+        }
+
+        .login-btn:hover {
+            opacity: 0.92;
+        }
+
+        .login-error {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-success {
+            border: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            color: #166534;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form > div {
+            margin: 0;
+        }
+
+        .field-error {
+            margin-top: 0.35rem;
+            color: #b91c1c;
+            font-size: 0.9rem;
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Inscription entreprise</h1>
+            <p class="login-subtitle">Renseignez les informations de votre entreprise.</p>
+
+            {% for message in app.flashes('success') %}
+                <div class="login-success">{{ message }}</div>
+            {% endfor %}
+
+            {% if errors[0] is defined %}
+                <div class="login-error">{{ errors[0] }}</div>
+            {% endif %}
+
+            <form method="post" id="entreprise-registration-form" autocomplete="off" class="login-form">
+                <input type="hidden" name="_token" value="{{ csrf_token('register_entreprise') }}">
+
+                <div>
+                    <label for="nom" class="login-label">Nom de l'entreprise</label>
+                    <input class="login-input" id="nom" name="nom" type="text" value="{{ values.nom|default('') }}">
+                    {% if errors.nom is defined %}<div class="field-error">{{ errors.nom }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="siret" class="login-label">SIRET</label>
+                    <input class="login-input" id="siret" name="siret" type="text" value="{{ values.siret|default('') }}">
+                    {% if errors.siret is defined %}<div class="field-error">{{ errors.siret }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="adresse" class="login-label">Adresse</label>
+                    <input class="login-input" id="adresse" name="adresse" type="text" value="{{ values.adresse|default('') }}">
+                    {% if errors.adresse is defined %}<div class="field-error">{{ errors.adresse }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="code_postal" class="login-label">Code postal</label>
+                    <input class="login-input" id="code_postal" name="code_postal" type="text" value="{{ values.code_postal|default('') }}">
+                    {% if errors.code_postal is defined %}<div class="field-error">{{ errors.code_postal }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="ville" class="login-label">Ville</label>
+                    <input class="login-input" id="ville" name="ville" type="text" value="{{ values.ville|default('') }}">
+                    {% if errors.ville is defined %}<div class="field-error">{{ errors.ville }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="pays" class="login-label">Pays</label>
+                    <input class="login-input" id="pays" name="pays" type="text" value="{{ values.pays|default('') }}">
+                    {% if errors.pays is defined %}<div class="field-error">{{ errors.pays }}</div>{% endif %}
+                </div>
+
+                <div>
+                    <label for="telephone" class="login-label">Téléphone</label>
+                    <input class="login-input" id="telephone" name="telephone" type="text" value="{{ values.telephone|default('') }}">
+                    {% if errors.telephone is defined %}<div class="field-error">{{ errors.telephone }}</div>{% endif %}
+                </div>
+
+                <button class="login-btn" type="submit">Continuer vers le choix de l'offre</button>
+            </form>
         </div>
-
-        <div>
-            <label for="siret">SIRET</label>
-            <input id="siret" name="siret" type="text" value="{{ values.siret|default('') }}">
-            {% if errors.siret is defined %}<div>{{ errors.siret }}</div>{% endif %}
-        </div>
-
-        <div>
-            <label for="adresse">Adresse</label>
-            <input id="adresse" name="adresse" type="text" value="{{ values.adresse|default('') }}">
-            {% if errors.adresse is defined %}<div>{{ errors.adresse }}</div>{% endif %}
-        </div>
-
-        <div>
-            <label for="code_postal">Code postal</label>
-            <input id="code_postal" name="code_postal" type="text" value="{{ values.code_postal|default('') }}">
-            {% if errors.code_postal is defined %}<div>{{ errors.code_postal }}</div>{% endif %}
-        </div>
-
-        <div>
-            <label for="ville">Ville</label>
-            <input id="ville" name="ville" type="text" value="{{ values.ville|default('') }}">
-            {% if errors.ville is defined %}<div>{{ errors.ville }}</div>{% endif %}
-        </div>
-
-        <div>
-            <label for="pays">Pays</label>
-            <input id="pays" name="pays" type="text" value="{{ values.pays|default('') }}">
-            {% if errors.pays is defined %}<div>{{ errors.pays }}</div>{% endif %}
-        </div>
-
-        <div>
-            <label for="telephone">Téléphone</label>
-            <input id="telephone" name="telephone" type="text" value="{{ values.telephone|default('') }}">
-            {% if errors.telephone is defined %}<div>{{ errors.telephone }}</div>{% endif %}
-        </div>
-
-        <button type="submit">Continuer vers le choix de l'offre</button>
-    </form>
+    </section>
 
     <script>
         const navEntry = window.performance?.getEntriesByType?.('navigation')?.[0];

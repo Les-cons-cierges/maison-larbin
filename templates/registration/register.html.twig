@@ -3,20 +3,159 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Créer un compte</h1>
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
 
-    {% for message in app.flashes('success') %}
-        <div>{{ message }}</div>
-    {% endfor %}
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword.first) }}
-        {{ form_row(registrationForm.plainPassword.second) }}
-        <button type="submit">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
 
-    <p><a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a></p>
+        .login-subtitle {
+            margin: 0.5rem 0 1.4rem;
+            color: #64748b;
+        }
+
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .login-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 0.75rem 0.9rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: var(--color-bleu);
+            box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+        }
+
+        .login-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-bleu);
+        }
+
+        .login-btn:hover {
+            opacity: 0.92;
+        }
+
+        .login-error {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-success {
+            border: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            color: #166534;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-form > div {
+            margin: 0;
+        }
+
+        .login-form ul {
+            margin: 0.35rem 0 0;
+            padding-left: 1rem;
+            color: #b91c1c;
+            font-size: 0.9rem;
+        }
+
+        .login-footer {
+            margin-top: 1.25rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        .login-footer a {
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Créer un compte</h1>
+            <p class="login-subtitle">Renseignez vos informations pour vous inscrire.</p>
+
+            {% for message in app.flashes('success') %}
+                <div class="login-success">{{ message }}</div>
+            {% endfor %}
+
+            {{ form_start(registrationForm, { attr: { class: 'login-form' } }) }}
+                {{ form_row(registrationForm.nom, {
+                    row_attr: { class: 'login-field' },
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input' }
+                }) }}
+                {{ form_row(registrationForm.prenom, {
+                    row_attr: { class: 'login-field' },
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input' }
+                }) }}
+                {{ form_row(registrationForm.email, {
+                    row_attr: { class: 'login-field' },
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input' }
+                }) }}
+                {{ form_row(registrationForm.plainPassword.first, {
+                    row_attr: { class: 'login-field' },
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input' }
+                }) }}
+                {{ form_row(registrationForm.plainPassword.second, {
+                    row_attr: { class: 'login-field' },
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input' }
+                }) }}
+                <button class="login-btn" type="submit">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+
+            <p class="login-footer"><a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a></p>
+        </div>
+    </section>
 {% endblock %}
