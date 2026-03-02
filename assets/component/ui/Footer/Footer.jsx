@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="flex flex-col gap-10 md:flex-row md:justify-between md:gap-8">
                     {/* Colonne 1 */}
                     <div className="md:w-[32%]">
-                        <a href="/" className="inline-block">
+                        <a href="/public" className="inline-block">
                             <img src={logo} alt="Maison Larbin" className="w-40 md:w-44" />
                         </a>
                         <p className="mt-4 max-w-md text-base leading-relaxed text-zinc-100 md:text-lg">
@@ -19,7 +19,7 @@ const Footer = () => {
                     {/* Colonne 2 */}
                     <div className="md:w-[18%] md:pt-8">
                         <ul className="space-y-2 text-lg leading-snug md:text-l">
-                            <li><a href="/" className="hover:opacity-80">Accueil</a></li>
+                            <li><a href="/public" className="hover:opacity-80">Accueil</a></li>
                             <li><a href="/les-palliers" className="hover:opacity-80">Les palliers</a></li>
                             <li><a href="/services" className="hover:opacity-80">Nos services</a></li>
                             <li><a href="/abonnements" className="hover:opacity-80">Abonnements</a></li>

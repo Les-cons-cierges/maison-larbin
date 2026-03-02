@@ -5,7 +5,7 @@ import App from "./component/App";
 import Home from "./component/pages/Home";
 import NotFound from "./component/pages/NotFound";
 import NavBar from "./component/ui/Navbar";
-import Footer from "./component/Footer/Footer";
+import Footer from "./component/ui/Footer/Footer";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
