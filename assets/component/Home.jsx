@@ -1,4 +1,3 @@
-import NavBar from "./Navbar/NavBar";
 
 const Home = ({ title, username, cityCount }) => (// ou props
     <>

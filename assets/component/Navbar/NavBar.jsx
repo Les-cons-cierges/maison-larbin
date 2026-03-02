@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import logo from '../../img/logo2.png';
+const logo = '/logo2.png';
 import './Navbar.css';
 import '../../styles/app.css';
 
