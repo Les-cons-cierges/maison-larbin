@@ -54,9 +54,16 @@ class Entreprise
     #[ORM\OneToMany(targetEntity: Requete::class, mappedBy: 'entreprise')]
     private Collection $requetes;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'idEntreprise')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->requetes = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +227,36 @@ class Entreprise
             // set the owning side to null (unless already changed)
             if ($requete->getEntreprise() === $this) {
                 $requete->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setIdEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getIdEntreprise() === $this) {
+                $user->setIdEntreprise(null);
             }
         }
 
