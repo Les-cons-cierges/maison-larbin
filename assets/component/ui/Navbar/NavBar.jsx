@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 const logo = '/logo2.png';
-import '../../styles/app.css';
+import '../../../styles/app.css';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)]">
+        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] relative z-10">
             <div className="flex justify-between items-center px-12 py-2 p-8">
 
                 {/* Logo */}

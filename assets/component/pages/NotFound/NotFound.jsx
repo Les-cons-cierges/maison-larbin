@@ -1,4 +1,4 @@
-import ASCIIText from "../ASCIIText";
+import ASCIIText from "../../ui/ASCIIText";
 
 const erreur404 = () => {
     return (
