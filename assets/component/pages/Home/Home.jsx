@@ -1,6 +1,8 @@
 import HeroSection from "../../ui/Hero";
-import FeaturesSection from "../About";
-import PricingCard from "../Card";
+import FeaturesSection from "../../ui/About";
+import PricingCard from "../../ui/Card";
+import ScrollStack, {ScrollStackItem} from "../../ui/ScrollStack/ScrollStack";
+import ClickSpark from "../../ui/ClickSpark/ClickSpark";
 
 const Home = ({title, username, cityCount}) => {
 
