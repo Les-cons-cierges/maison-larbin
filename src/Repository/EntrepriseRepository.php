@@ -16,6 +16,28 @@ class EntrepriseRepository extends ServiceEntityRepository
         parent::__construct($registry, Entreprise::class);
     }
 
+    /**
+     * @return array<int, array{offre: string, total: int}>
+     */
+    public function getOfferBreakdown(): array
+    {
+        $rows = $this->createQueryBuilder('e')
+            ->select('COALESCE(e.type_abonnement, :unknown) AS offre', 'COUNT(e.id) AS total')
+            ->setParameter('unknown', 'Non renseignee')
+            ->groupBy('e.type_abonnement')
+            ->orderBy('total', 'DESC')
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_map(
+            static fn (array $row): array => [
+                'offre' => (string) $row['offre'],
+                'total' => (int) $row['total'],
+            ],
+            $rows
+        );
+    }
+
 //    /**
 //     * @return Entreprise[] Returns an array of Entreprise objects
 //     */
