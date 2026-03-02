@@ -33,10 +33,11 @@ const NavBar = () => {
                 {/* Menu principal — caché sur mobile */}
                 <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
-                        <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
-                        <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
-                        <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
-                        <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
+                        <li><a href="/" className="hover:opacity-75 transition-opacity text-bleu">Accueil</a></li>
+                        <li><a href="/maps" className="hover:opacity-75 transition-opacity text-bleu">Maps</a></li>
+                        <li><a href="/services" className="hover:opacity-75 transition-opacity text-bleu">Services</a></li>
+                        <li><a href="/propos" className="hover:opacity-75 transition-opacity text-bleu">À propos</a></li>
+                        <li><a href="/contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a></li>
                     </ul>
                 </div>
 
@@ -44,10 +45,10 @@ const NavBar = () => {
                 <div className="flex items-center gap-4">
                     {/* Liens auth — cachés sur mobile */}
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
-                        <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                        <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
                         <li>
                             <a href="/register"
-                               className="bg-black text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                               className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
                                 S'inscrire
                             </a>
                         </li>
@@ -69,6 +70,7 @@ const NavBar = () => {
                 <div className="px-12 pb-4 flex flex-col gap-4">
                     <ul className="flex flex-col gap-3 list-none">
                         <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
+                        <li><a href="/maps" className="hover:opacity-75 transition-opacity">Maps</a></li>
                         <li><a href="/services" className="hover:opacity-75 transition-opacity">Services</a></li>
                         <li><a href="/propos" className="hover:opacity-75 transition-opacity">À propos</a></li>
                         <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
