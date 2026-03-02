@@ -5,6 +5,7 @@ import App from "./component/App";
 import Home from "./component/Home";
 import NotFound from "./component/NotFound/NotFound";
 import NavBar from "./component/Navbar/NavBar";
+import Footer from "./component/Footer/Footer";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
@@ -38,4 +39,9 @@ if (homeContainer) {
 const error404Container = document.getElementById("error404");
 if (error404Container) {
     createRoot(error404Container).render(< NotFound/>);
+}
+
+const footerContainer = document.getElementById("footer");
+if (footerContainer) {
+    createRoot(footerContainer).render(<Footer />);
 }
