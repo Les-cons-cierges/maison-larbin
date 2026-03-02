@@ -74,6 +74,7 @@ class EntrepriseRegistrationController extends AbstractController
                 $currentUser = $this->getUser();
                 if ($currentUser instanceof User) {
                     $entreprise->setOwner($currentUser);
+                    $currentUser->setIdEntreprise($entreprise);
                 }
                 $now = new \DateTimeImmutable();
                 $entreprise->setCreatedAt($now);
