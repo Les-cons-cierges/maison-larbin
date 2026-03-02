@@ -3,17 +3,20 @@
 namespace App\Controller\AdminMaisonLarbin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+
+
 
 #[AdminDashboard(routePath: '/maison-larbin/admin', routeName: 'admin_maison_larbin')]
 class DashboardMaisonLarbinController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        return parent::index();
+        return($this->render('AdminMaisonLarbin/dashboard.html.twig'));
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -37,9 +40,15 @@ class DashboardMaisonLarbinController extends AbstractDashboardController
             ->setTitle('Maison Larbin');
     }
 
+    public function configureAssets(): Assets
+    {
+        return Assets::new()->addAssetMapperEntry('admin');
+    }
+
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkTo(SomeCrudController::class, 'The Label', 'fas fa-list');
+        yield MenuItem::linkTo(UserCrudController::class, 'Employes', 'fa fa-users');
+        yield MenuItem::linkTo(EntrepriseCrudController::class, 'Entreprises clientes', 'fa fa-building');
     }
 }
