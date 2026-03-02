@@ -1,5 +1,68 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    <h1>Bienvenue dans le dashboard</h1>
+    <div class="content-panel">
+        <h1>Dashboard Maison Larbin</h1>
+        <div class="kpis">
+            <article class="kpi">
+                <p class="kpi-label">Clients</p>
+                <p class="kpi-value">{{ totalClients }}</p>
+            </article>
+            <article class="kpi">
+                <p class="kpi-label">Types d'offre</p>
+                <p class="kpi-value">{{ offresStats|length }}</p>
+            </article>
+        </div>
+
+        <h2>Repartition des offres</h2>
+        {% if offresStats is not empty %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Offre</th>
+                    <th>Nombre de clients</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in offresStats %}
+                    <tr>
+                        <td>{{ row.offre }}</td>
+                        <td>{{ row.total }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucune entreprise cliente pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <style>
+        .content-panel {
+            display: grid;
+            gap: 1rem;
+        }
+        .kpis {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        .kpi {
+            padding: 1rem;
+            border: 1px solid #e2e5e8;
+            border-radius: 0.5rem;
+            background: #fff;
+        }
+        .kpi-label {
+            margin: 0 0 0.25rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .kpi-value {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+    </style>
 {% endblock %}
