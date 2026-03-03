@@ -6,6 +6,7 @@ import Home from "./component/pages/Home";
 import NotFound from "./component/pages/NotFound";
 import NavBar from "./component/ui/Navbar";
 import Footer from "./component/ui/Footer/Footer";
+import Maps from "./component/pages/Maps/Maps";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
@@ -36,6 +37,11 @@ if (homeContainer) {
     createRoot(homeContainer).render(<Home {...homeProps} />);
 }
 
+const mapsContainer = document.getElementById("maps");
+if (mapsContainer) {
+    createRoot(mapsContainer).render(< Maps/>);
+}
+
 const error404Container = document.getElementById("error404");
 if (error404Container) {
     createRoot(error404Container).render(< NotFound/>);
@@ -45,3 +51,4 @@ const footerContainer = document.getElementById("footer");
 if (footerContainer) {
     createRoot(footerContainer).render(<Footer />);
 }
+
