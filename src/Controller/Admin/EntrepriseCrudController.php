@@ -46,7 +46,7 @@ class EntrepriseCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->disable(Action::NEW, Action::DELETE, Action::DETAIL);
+        return $actions->disable(Action::NEW, Action::DELETE);
     }
 
     public function createIndexQueryBuilder(
