@@ -92,11 +92,15 @@
 }
 
 @theme {
-    /* main color */
-    --color-bleu: #1b475d;
+    /* ── main blues ── */
+    --color-bleu:        #1b475d;   /* fond très clair */
+    --color-bleu-sombre: #f4f6f8;   /* fond app */
+    --color-bleu-mid:    #e2e8ed;   /* sidebar / cards principales */
+    --color-bleu-light:  #edf1f5;   /* cards secondaires */
+    --color-bleu-hover:  #d4dde5;   /* hover états */
 
     /* employe color */
-    --color-jaune-employe: #fad564;
+    --color-jaune-employe:  #fad564;
     --color-orange-employe: #e76f51;
 
     /* cadres color */
@@ -104,11 +108,11 @@
     --color-bleu-cadre: #5fa8d3;
 
     /* direction color */
-    --color-beige-direction: #8ebd9d;
+    --color-beige-direction:   #8ebd9d;
     --color-bordeau-direction: #5fa8d3;
 
     /* maison larbin color */
-    --color-vert-maison-larbin: #d3dc7c;
+    --color-vert-maison-larbin:      #d3dc7c;
     --color-vert-kaki-maison-larbin: #aab18b;
 }
 

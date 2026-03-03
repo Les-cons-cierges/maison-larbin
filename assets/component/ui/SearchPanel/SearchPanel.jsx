@@ -65,19 +65,19 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
     const pct = ((radius - MIN_RADIUS) / (MAX_RADIUS - MIN_RADIUS)) * 100;
 
     return (
-        <div className="bg-bleu-sombre border border-jaune-employe/20 rounded-2xl p-4 md:p-5 text-white">
-            <h2 className="text-jaune-employe font-bold text-sm tracking-wide mb-4">🔍 Recherche à proximité</h2>
+        <div className="bg-bleu-sombre border border-orange-employe/20 rounded-2xl p-4 md:p-5 text-bleu">
+            <h2 className="text-orange-employe font-bold text-sm tracking-wide mb-4">🔍 Recherche à proximité</h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
 
                 {/* Mot-clé */}
                 <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.78rem] font-semibold text-jaune-employe uppercase tracking-widest">
+                    <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest">
                         Mot-clé (optionnel)
                     </label>
                     <input
-                        className="bg-bleu-sombre border border-jaune-employe/25 rounded-lg text-white px-2.5 py-2
-                       text-sm outline-none focus:border-jaune-employe transition-colors placeholder-white/30"
+                        className="bg-bleu-sombre border border-orange-employe/25 rounded-lg text-bleu px-2.5 py-2
+                       text-sm outline-none focus:border-orange-employe transition-colors placeholder-bleu/40"
                         type="text"
                         placeholder="Ex: pizza, sushi, parc…"
                         value={query}
@@ -87,7 +87,7 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
 
                 {/* Types de lieux */}
                 <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.78rem] font-semibold text-jaune-employe uppercase tracking-widest flex items-center gap-2">
+                    <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest flex items-center gap-2">
                         Types de lieux
                         <span className="bg-orange-employe/20 border border-orange-employe/60 rounded-full px-2 py-0.5
                              text-[0.68rem] text-orange-employe font-bold normal-case tracking-normal">
@@ -95,7 +95,7 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
             </span>
                     </label>
                     <div className="flex flex-wrap gap-1.5 max-h-40 md:max-h-32 overflow-y-auto py-0.5
-                          [scrollbar-width:thin] [scrollbar-color:--color-jaune-employe_transparent]">
+                          [scrollbar-width:thin] [scrollbar-color:--color-orange-employe_transparent]">
                         {PLACE_TYPES.map((t) => {
                             const active = placeTypes.includes(t.value);
                             return (
@@ -108,8 +108,8 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                               px-2.5 py-1.5 cursor-pointer whitespace-nowrap select-none
                               transition-all duration-150 border
                               ${active
-                                        ? 'bg-jaune-employe border-jaune-employe text-bleu-mid font-bold shadow-[0_0_0_2px_rgba(250,213,100,0.25)]'
-                                        : 'bg-bleu-sombre border-jaune-employe/25 text-white hover:border-jaune-employe hover:bg-bleu-mid'}`}
+                                        ? 'bg-orange-employe border-orange-employe text-white font-bold shadow-[0_0_0_2px_rgba(231,111,81,0.25)]'
+                                        : 'bg-bleu-sombre border-orange-employe/25 text-bleu hover:border-orange-employe hover:bg-bleu-mid'}`}
                                 >
                                     <span className="text-[0.95rem] leading-none">{t.emoji}</span>
                                     <span>{t.label}</span>
@@ -121,14 +121,14 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
 
                 {/* Rayon */}
                 <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.78rem] font-semibold text-jaune-employe uppercase tracking-widest">
+                    <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest">
                         Rayon de recherche
                     </label>
-                    <div className="flex items-baseline gap-2 bg-bleu-sombre border border-jaune-employe/25 rounded-xl px-3.5 py-2 mb-1">
+                    <div className="flex items-baseline gap-2 bg-bleu-sombre border border-orange-employe/25 rounded-xl px-3.5 py-2 mb-1">
             <span className="text-2xl font-black text-orange-employe leading-none tracking-tight">
               {formatRadius(radius)}
             </span>
-                        <span className="text-[0.75rem] text-white">autour de vous</span>
+                        <span className="text-[0.75rem] text-bleu">autour de vous</span>
                     </div>
                     <input
                         type="range"
@@ -152,8 +152,8 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                                 className={`flex-1 min-w-14.5 rounded-lg text-[0.72rem] font-semibold py-1.5 px-1
                             text-center transition-all duration-150 border cursor-pointer
                             ${radius === r.value
-                                    ? 'bg-jaune-employe border-jaune-employe text-bleu-mid font-bold'
-                                    : 'bg-bleu-sombre border-jaune-employe/25 text-white hover:border-jaune-employe hover:text-white'}`}
+                                    ? 'bg-orange-employe border-orange-employe text-white font-bold'
+                                    : 'bg-bleu-sombre border-orange-employe/25 text-bleu hover:border-orange-employe hover:text-bleu'}`}
                             >
                                 {r.label}
                             </button>

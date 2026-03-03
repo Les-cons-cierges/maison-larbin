@@ -49,12 +49,12 @@ const MapInfoCard = ({place, onClose}) => {
                 className="absolute top-3 right-3 text-jaune-employe hover:text-white transition-colors text-sm leading-none px-1 cursor-pointer bg-transparent border-none"
             >✕</button>
 
-            <div className="font-bold text-white text-base leading-snug pr-6 mb-1">
+            <div className="font-bold text-bleu text-base leading-snug pr-6 mb-1">
                 {place.displayName?.text}
             </div>
 
             {place.formattedAddress && (
-                <div className="text-jaune-employe text-xs mb-2 leading-snug">
+                <div className="text-orange-employe text-xs mb-2 leading-snug">
                     📍 {place.formattedAddress}
                 </div>
             )}
@@ -62,12 +62,12 @@ const MapInfoCard = ({place, onClose}) => {
             <div className="flex items-center justify-between gap-2 mb-2">
                 {rating && (
                     <div className="flex items-center gap-1.5">
-                        <span className="text-jaune-employe text-xs tracking-tighter">
+                        <span className="text-orange-employe text-xs tracking-tighter">
                             {'★'.repeat(stars)}{'☆'.repeat(5 - stars)}
                         </span>
-                        <span className="text-jaune-employe font-bold text-sm">{rating.toFixed(1)}</span>
+                        <span className="text-orange-employe font-bold text-sm">{rating.toFixed(1)}</span>
                         {place.userRatingCount && (
-                            <span className="text-white text-xs">({place.userRatingCount} avis)</span>
+                            <span className="text-bleu text-xs">({place.userRatingCount} avis)</span>
                         )}
                     </div>
                 )}
@@ -86,12 +86,12 @@ const MapInfoCard = ({place, onClose}) => {
 
             {place.currentOpeningHours?.weekdayDescriptions?.length > 0 && (
                 <details className="mb-2 text-xs">
-                    <summary className="cursor-pointer text-jaune-employe hover:text-white transition-colors mb-1">
+                    <summary className="cursor-pointer text-orange-employe hover:text-bleu transition-colors mb-1">
                         Horaires
                     </summary>
                     <ul className="list-none p-0 m-0 space-y-0.5">
                         {place.currentOpeningHours.weekdayDescriptions.map((d, i) => (
-                            <li key={i} className="text-white">{d}</li>
+                            <li key={i} className="text-bleu">{d}</li>
                         ))}
                     </ul>
                 </details>
@@ -99,14 +99,14 @@ const MapInfoCard = ({place, onClose}) => {
 
             {place.internationalPhoneNumber && (
                 <div className="text-xs mt-1">
-                    📞 <a href={`tel:${place.internationalPhoneNumber}`} className="text-jaune-employe hover:underline">
+                    📞 <a href={`tel:${place.internationalPhoneNumber}`} className="text-orange-employe hover:underline">
                     {place.internationalPhoneNumber}
                 </a>
                 </div>
             )}
             {place.websiteUri && (
                 <div className="text-xs mt-1">
-                    🌐 <a href={place.websiteUri} target="_blank" rel="noreferrer" className="text-jaune-employe hover:underline">
+                    🌐 <a href={place.websiteUri} target="_blank" rel="noreferrer" className="text-orange-employe hover:underline">
                     Site web
                 </a>
                 </div>
@@ -164,12 +164,12 @@ const MapContent = ({userPos, places, activePlace, setActivePlace, radius, locat
             {locatedPoint && (
                 <AdvancedMarker position={locatedPoint} title={locatedPoint.label}>
                     <div className="flex flex-col items-center gap-0">
-                        <div className="bg-bleu-sombre border border-jaune-employe rounded-lg px-2 py-1
-                                        text-[0.72rem] text-white whitespace-nowrap max-w-45
+                        <div className="bg-bleu-sombre border border-orange-employe rounded-lg px-2 py-1
+                                        text-[0.72rem] text-bleu whitespace-nowrap max-w-45
                                         overflow-hidden text-ellipsis shadow-lg mb-1">
                             {locatedPoint.label}
                         </div>
-                        <div className="w-3.5 h-3.5 rounded-full bg-jaune-employe border-[3px] border-white shadow-[0_0_10px_rgba(250,213,100,0.8)]"/>
+                        <div className="w-3.5 h-3.5 rounded-full bg-orange-employe border-[3px] border-white shadow-[0_0_10px_rgba(231,111,81,0.8)]"/>
                     </div>
                 </AdvancedMarker>
             )}
@@ -190,7 +190,7 @@ const MapContent = ({userPos, places, activePlace, setActivePlace, radius, locat
                                          shadow-[0_2px_10px_rgba(0,0,0,0.4)] transition-all duration-150
                                          ${isActive
                             ? 'bg-orange-employe border-white scale-125 shadow-[0_0_0_4px_rgba(231,111,81,0.35)]'
-                            : 'bg-bleu-sombre border-jaune-employe hover:scale-110 hover:border-orange-employe hover:bg-orange-employe'}`}>
+                            : 'bg-bleu-sombre border-orange-employe hover:scale-110 hover:border-orange-employe hover:bg-orange-employe'}`}>
                             {emoji}
                         </div>
                     </AdvancedMarker>
@@ -277,7 +277,7 @@ const Maps = () => {
 
     return (
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} libraries={['places']} apiOptions={{loading: 'async'}}>
-            <div className="relative flex flex-col md:flex-row w-screen h-screen overflow-hidden bg-bleu-sombre text-white">
+            <div className="relative flex flex-col md:flex-row w-screen h-screen overflow-hidden bg-bleu-sombre text-bleu">
 
                 {/* ══ OVERLAY sombre sur mobile quand sidebar ouverte ══ */}
                 {sidebarOpen && (
@@ -294,21 +294,21 @@ const Maps = () => {
                     z-30 md:z-10
                     h-[85vh] md:h-screen
                     w-full md:w-80 md:min-w-80
-                    bg-bleu-sombre border-t-2 md:border-t-0 md:border-r-2 border-jaune-employe/30
+                    bg-bleu-sombre border-t-2 md:border-t-0 md:border-r-2 border-orange-employe/30
                     rounded-t-3xl md:rounded-none
                     flex flex-col
                     transition-transform duration-300 ease-in-out
                     ${sidebarOpen ? 'translate-y-0' : 'translate-y-full md:translate-y-0'}
-                    [scrollbar-width:thin] [scrollbar-color:--color-jaune-employe_transparent]
+                    [scrollbar-width:thin] [scrollbar-color:--color-orange-employe_transparent]
                 `}>
                     {/* Poignée de drag mobile */}
                     <div className="md:hidden flex justify-center pt-3 pb-1 shrink-0">
-                        <div className="w-10 h-1 bg-jaune-employe/40 rounded-full"/>
+                        <div className="w-10 h-1 bg-orange-employe/40 rounded-full"/>
                     </div>
 
                     {/* Contenu scrollable */}
                     <div className="flex-1 overflow-y-auto px-4 py-3 md:py-4
-                                    [scrollbar-width:thin] [scrollbar-color:--color-jaune-employe_transparent]">
+                                    [scrollbar-width:thin] [scrollbar-color:--color-orange-employe_transparent]">
                         <LocationSearch onLocate={handleLocate}/>
                         <SearchPanel onSearch={handleSearch} isLoading={isLoading} onRadiusChange={setRadius}/>
                         {error && (
@@ -346,7 +346,7 @@ const Maps = () => {
                     {/* ══ BOUTON toggle sidebar (mobile only) ══ */}
                     <div className="md:hidden fixed bottom-6 right-4 z-40 flex items-center gap-2">
                         {places.length > 0 && !sidebarOpen && (
-                            <span className="bg-jaune-employe text-bleu-mid text-xs font-black rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
+                            <span className="bg-orange-employe text-white text-xs font-black rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
                                 {places.length}
                             </span>
                         )}

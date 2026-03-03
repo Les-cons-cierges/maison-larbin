@@ -108,11 +108,11 @@ const LocationSearch = ({ onLocate }) => {
     };
 
     return (
-        <div ref={wrapperRef} className="mb-3.5 pb-4 border-b border-jaune-employe/20 flex flex-col gap-2">
+        <div ref={wrapperRef} className="mb-3.5 pb-4 border-b border-orange-employe/20 flex flex-col gap-2">
 
             {/* En-tête */}
             <div className="flex items-center justify-between gap-2">
-                <span className="text-[0.78rem] font-semibold text-jaune-employe uppercase tracking-widest">
+                <span className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest">
                     📍 Localisation
                 </span>
                 <button
@@ -120,24 +120,24 @@ const LocationSearch = ({ onLocate }) => {
                     onClick={handleGeolocate}
                     disabled={geoLoading}
                     title="Utiliser ma position GPS"
-                    className={`flex items-center gap-1.5 bg-bleu-sombre border rounded-lg text-white
+                    className={`flex items-center gap-1.5 bg-bleu-sombre border rounded-lg text-bleu
                                 text-[0.72rem] font-semibold px-2.5 py-1 cursor-pointer whitespace-nowrap
                                 transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed
                                 ${geoLoading
-                        ? 'border-jaune-employe text-jaune-employe'
-                        : 'border-jaune-employe/30 hover:border-jaune-employe hover:text-jaune-employe hover:bg-bleu-mid'}`}
+                        ? 'border-orange-employe text-orange-employe'
+                        : 'border-orange-employe/30 hover:border-orange-employe hover:text-orange-employe hover:bg-bleu-mid'}`}
                 >
                     {geoLoading
-                        ? <span className="inline-block w-3 h-3 border-2 border-jaune-employe/30 border-t-jaune-employe rounded-full animate-spin"/>
+                        ? <span className="inline-block w-3 h-3 border-2 border-orange-employe/30 border-t-orange-employe rounded-full animate-spin"/>
                         : '🎯 Ma position'
                     }
                 </button>
             </div>
 
             {/* Barre de recherche */}
-            <div className="flex items-center bg-bleu-sombre border border-jaune-employe/25 rounded-xl
+            <div className="flex items-center bg-bleu-sombre border border-orange-employe/25 rounded-xl
                             px-2.5 gap-1 transition-all duration-200
-                            focus-within:border-jaune-employe focus-within:shadow-[0_0_0_3px_rgba(250,213,100,0.12)]">
+                            focus-within:border-orange-employe focus-within:shadow-[0_0_0_3px_rgba(231,111,81,0.12)]">
                 <input
                     ref={inputRef}
                     type="text"
@@ -148,12 +148,12 @@ const LocationSearch = ({ onLocate }) => {
                     onFocus={() => suggestions.length > 0 && setIsOpen(true)}
                     disabled={!isReady}
                     autoComplete="off"
-                    className="flex-1 bg-transparent border-none outline-none text-white text-sm
-                               py-2.5 placeholder-white/30 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="flex-1 bg-transparent border-none outline-none text-bleu text-sm
+                               py-2.5 placeholder-bleu/40 disabled:opacity-40 disabled:cursor-not-allowed"
                 />
                 {value && (
                     <button onClick={handleClear} type="button" title="Effacer"
-                            className="text-white/30 hover:text-orange-employe text-xs px-1 leading-none transition-colors cursor-pointer border-none bg-transparent">
+                            className="text-bleu/30 hover:text-orange-employe text-xs px-1 leading-none transition-colors cursor-pointer border-none bg-transparent">
                         ✕
                     </button>
                 )}
@@ -172,7 +172,7 @@ const LocationSearch = ({ onLocate }) => {
 
             {/* Dropdown suggestions */}
             {isOpen && suggestions.length > 0 && (
-                <ul className="list-none m-0 py-1 bg-bleu-sombre border border-jaune-employe/25 rounded-xl
+                <ul className="list-none m-0 py-1 bg-bleu-sombre border border-orange-employe/25 rounded-xl
                                shadow-[0_8px_24px_rgba(14,35,48,0.7)] overflow-hidden
                                animate-[loc-fadein_0.15s_ease]">
                     {suggestions.map((s, i) => {
@@ -183,16 +183,16 @@ const LocationSearch = ({ onLocate }) => {
                                 onMouseDown={() => selectSuggestion(s)}
                                 onMouseEnter={() => setCursor(i)}
                                 className={`flex items-start gap-2 px-3 py-2.5 cursor-pointer
-                                            border-b border-jaune-employe/10 last:border-b-0 transition-colors duration-100
+                                            border-b border-orange-employe/10 last:border-b-0 transition-colors duration-100
                                             ${i === cursor ? 'bg-bleu-mid' : 'hover:bg-bleu-mid'}`}
                             >
                                 <span className="text-sm shrink-0 mt-0.5 opacity-70">📌</span>
                                 <div className="flex flex-col gap-0.5 min-w-0">
-                                    <span className="text-sm text-white font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
+                                    <span className="text-sm text-bleu font-semibold whitespace-nowrap overflow-hidden text-ellipsis">
                                         {p.mainText?.toString() || p.text?.toString()}
                                     </span>
                                     {p.secondaryText && (
-                                        <span className="text-[0.72rem] text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                                        <span className="text-[0.72rem] text-bleu/70 whitespace-nowrap overflow-hidden text-ellipsis">
                                             {p.secondaryText.toString()}
                                         </span>
                                     )}
@@ -205,11 +205,11 @@ const LocationSearch = ({ onLocate }) => {
 
             {/* Badge localisation active */}
             {located && !geoError && (
-                <div className="flex items-center gap-2 bg-bleu-sombre border border-jaune-employe/30 rounded-lg px-2.5 py-1.5
+                <div className="flex items-center gap-2 bg-bleu-sombre border border-orange-employe/30 rounded-lg px-2.5 py-1.5
                                 animate-[loc-fadein_0.25s_ease]">
-                    <span className="shrink-0 w-2 h-2 rounded-full bg-jaune-employe
+                    <span className="shrink-0 w-2 h-2 rounded-full bg-orange-employe
                                      animate-[loc-pulse_1.8s_ease-in-out_infinite]"/>
-                    <span className="text-[0.72rem] text-jaune-employe whitespace-nowrap overflow-hidden text-ellipsis max-w-55">
+                    <span className="text-[0.72rem] text-orange-employe whitespace-nowrap overflow-hidden text-ellipsis max-w-55">
                         {located.label}
                     </span>
                 </div>
