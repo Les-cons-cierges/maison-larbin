@@ -15,7 +15,18 @@ if (appContainer) {
 
 const navbarContainer = document.getElementById("navbar");
 if (navbarContainer) {
-    createRoot(navbarContainer).render(<NavBar/>);
+    let navbarUser = null;
+    const rawUser = navbarContainer.dataset.user;
+
+    if (rawUser) {
+        try {
+            navbarUser = JSON.parse(rawUser);
+        } catch (error) {
+            console.error("JSON utilisateur invalide pour NavBar:", error);
+        }
+    }
+
+    createRoot(navbarContainer).render(<NavBar user={navbarUser} />);
 }
 
 
