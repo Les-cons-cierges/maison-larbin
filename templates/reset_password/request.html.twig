@@ -1,22 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Mot de passe oublié{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    <h1>Reset your password</h1>
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
 
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Enter your email address, and we will send you a
-                link to reset your password.
-            </small>
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
+
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
+
+        .login-subtitle {
+            margin: 0.5rem 0 1.4rem;
+            color: #64748b;
+        }
+
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .login-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 0.75rem 0.9rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: var(--color-bleu);
+            box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+        }
+
+        .login-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-bleu);
+        }
+
+        .login-btn:hover {
+            opacity: 0.92;
+        }
+
+        .login-error {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+            border-radius: 12px;
+            padding: 0.7rem 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .login-hint {
+            margin: -0.25rem 0 0;
+            color: #64748b;
+            font-size: 0.92rem;
+        }
+
+        .login-footer {
+            margin-top: 1.25rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        .login-footer a {
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Mot de passe oublié</h1>
+            <p class="login-subtitle">Saisissez votre email pour recevoir un lien de réinitialisation.</p>
+
+            {% for flash_error in app.flashes('reset_password_error') %}
+                <div class="login-error" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            {{ form_start(requestForm, { attr: { class: 'login-form' } }) }}
+                {{ form_row(requestForm.email, {
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input', autocomplete: 'email' }
+                }) }}
+
+                <p class="login-hint">Si un compte existe avec cet email, vous recevrez un lien de réinitialisation.</p>
+
+                <button class="login-btn" type="submit">Envoyer l'email</button>
+            {{ form_end(requestForm) }}
+
+            <p class="login-footer"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
         </div>
-
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+    </section>
 {% endblock %}
