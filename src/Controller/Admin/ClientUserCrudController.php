@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -72,6 +73,8 @@ class ClientUserCrudController extends AbstractCrudController
                 ->setFormTypeOption('constraints', [
                     new Count(min: 1, minMessage: 'Selectionnez un role.'),
                 ]),
+            DateTimeField::new('created_at', 'Crée le')->hideOnForm(),
+            DateTimeField::new('updated_at', 'Mis a jour le')->hideOnForm(),
 
         ];
     }
