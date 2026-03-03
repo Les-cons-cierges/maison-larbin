@@ -99,7 +99,13 @@
             <p class="login-subtitle">Choisissez un mot de passe sécurisé pour votre compte.</p>
 
             {{ form_start(resetForm, { attr: { class: 'login-form' } }) }}
-                {{ form_row(resetForm.plainPassword, {
+                {{ form_row(resetForm.plainPassword.first, {
+                    label: 'Nouveau mot de passe',
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input', autocomplete: 'new-password' }
+                }) }}
+                {{ form_row(resetForm.plainPassword.second, {
+                    label: 'Confirmer le mot de passe',
                     label_attr: { class: 'login-label' },
                     attr: { class: 'login-input', autocomplete: 'new-password' }
                 }) }}
