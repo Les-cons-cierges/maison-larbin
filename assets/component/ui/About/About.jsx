@@ -109,7 +109,7 @@ export default function FeaturesSection() {
     }, []);
 
     return (
-        <section className="bg-bleu py-24 px-8 md:px-16">
+        <section id="about" className="bg-bleu py-24 px-8 md:px-16">
             <div className="max-w-4xl mx-auto flex flex-col gap-14">
 
                 {/* Header */}

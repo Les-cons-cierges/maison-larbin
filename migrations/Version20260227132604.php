@@ -19,7 +19,12 @@ final class Version20260227132604 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+        // Ignorée si la table entreprise n'existe pas encore (elle sera créée par Version20260302134039)
+        $tableExists = $this->connection->createSchemaManager()->tablesExist(['entreprise']);
+        if (!$tableExists) {
+            return;
+        }
+
         $this->addSql('ALTER TABLE entreprise CHANGE type_abonnement type_abonnement VARCHAR(255) DEFAULT NULL');
     }
 
