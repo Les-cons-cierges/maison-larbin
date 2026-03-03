@@ -34,8 +34,7 @@ class DasboardClientController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkTo(ClientUserCrudController::class, 'User', 'fas fa-users');
-        // ->setController(UserCrudController::class);
-        // yield MenuItem::linkToRoute('Entreprise', 'fas fa-building', 'company_index');
+        yield MenuItem::linkTo(EntrepriseCrudController::class,'Entreprise', 'fas fa-building');
         // yield MenuItem::linkToRoute('Abonnement', 'fas fa-credit-card', 'subscription_index');
     }
 }
