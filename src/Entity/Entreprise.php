@@ -46,6 +46,7 @@ class Entreprise
     private ?\DateTimeImmutable $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'entreprises')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?User $owner = null;
 
     /**

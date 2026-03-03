@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class RegistrationController extends AbstractController
 {
@@ -20,6 +22,7 @@ final class RegistrationController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher,
         Security $security,
+        SluggerInterface $slugger,
     ): Response {
         if ($this->getUser() instanceof User) {
             return $this->redirectToRoute('app_entreprise_register');
@@ -32,6 +35,22 @@ final class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $plainPassword = (string) $form->get('plainPassword')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            $user->setAvatar(User::DEFAULT_AVATAR);
+
+            $avatarFile = $form->get('avatarFile')->getData();
+
+            if ($avatarFile) {
+                $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$avatarFile->guessExtension();
+
+                try {
+                    $avatarFile->move($this->getParameter('avatar_directory'), $newFilename);
+                    $user->setAvatar($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Upload avatar impossible.');
+                }
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
