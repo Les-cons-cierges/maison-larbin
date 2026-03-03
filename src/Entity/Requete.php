@@ -33,7 +33,7 @@ class Requete
     private ?\DateTimeImmutable $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'requetes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $auteur = null;
 
     #[ORM\ManyToOne(inversedBy: 'requetes')]
@@ -45,6 +45,7 @@ class Requete
     private ?Categorie $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'requetesAssignee')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?User $assignee = null;
 
     public function getId(): ?int

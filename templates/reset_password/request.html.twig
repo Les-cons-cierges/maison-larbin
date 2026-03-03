@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Mot de passe oublié{% endblock %}
 
 {% block body %}
     <style>
@@ -74,21 +74,6 @@
             opacity: 0.92;
         }
 
-        .login-help {
-            margin-top: -0.3rem;
-            text-align: right;
-        }
-
-        .login-help a {
-            color: #334155;
-            font-size: 0.92rem;
-            text-decoration: none;
-        }
-
-        .login-help a:hover {
-            text-decoration: underline;
-        }
-
         .login-error {
             border: 1px solid #fecaca;
             background: #fef2f2;
@@ -97,6 +82,12 @@
             padding: 0.7rem 0.85rem;
             margin-bottom: 1rem;
             font-size: 0.95rem;
+        }
+
+        .login-hint {
+            margin: -0.25rem 0 0;
+            color: #64748b;
+            font-size: 0.92rem;
         }
 
         .login-footer {
@@ -113,40 +104,25 @@
 
     <section class="login-page">
         <div class="login-card">
-            <h1 class="login-title">Connexion</h1>
-            <p class="login-subtitle">Accédez à votre espace.</p>
+            <h1 class="login-title">Mot de passe oublié</h1>
+            <p class="login-subtitle">Saisissez votre email pour recevoir un lien de réinitialisation.</p>
 
-            {% if error %}
-                <div class="login-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+            {% for flash_error in app.flashes('reset_password_error') %}
+                <div class="login-error" role="alert">{{ flash_error }}</div>
+            {% endfor %}
 
-            {% if app.user %}
-                <p class="login-subtitle">Connecté en tant que {{ app.user.userIdentifier }}.</p>
-                <form method="post" action="{{ path('app_logout') }}" class="login-form">
-                    <button class="login-btn" type="submit">Se déconnecter</button>
-                </form>
-            {% else %}
-                <form method="post" class="login-form">
-                    <div>
-                        <label for="username" class="login-label">Email</label>
-                        <input class="login-input" type="email" id="username" name="_username" value="{{ last_username }}" required autocomplete="email">
-                    </div>
+            {{ form_start(requestForm, { attr: { class: 'login-form' } }) }}
+                {{ form_row(requestForm.email, {
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input', autocomplete: 'email' }
+                }) }}
 
-                    <div>
-                        <label for="password" class="login-label">Mot de passe</label>
-                        <input class="login-input" type="password" id="password" name="_password" required autocomplete="current-password">
-                    </div>
-                    <div class="login-help">
-                        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
-                    </div>
+                <p class="login-hint">Si un compte existe avec cet email, vous recevrez un lien de réinitialisation.</p>
 
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button class="login-btn" type="submit">Envoyer l'email</button>
+            {{ form_end(requestForm) }}
 
-                    <button class="login-btn" type="submit">Se connecter</button>
-                </form>
-            {% endif %}
-
-            <p class="login-footer"><a href="{{ path('app_register') }}">Créer un compte</a></p>
+            <p class="login-footer"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
         </div>
     </section>
 {% endblock %}

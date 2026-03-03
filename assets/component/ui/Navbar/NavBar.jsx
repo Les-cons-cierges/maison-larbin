@@ -1,9 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 const logo = '/logo2.png';
 import '../../../styles/app.css';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const userMenuRef = useRef(null);
 
     useEffect(() => {
         const hamburgers = document.querySelectorAll(".hamburger");
@@ -16,6 +18,28 @@ const NavBar = () => {
             hamburgers.forEach((hamburger) => {
                 hamburger.replaceWith(hamburger.cloneNode(true));
             });
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+                setIsUserMenuOpen(false);
+            }
+        };
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                setIsUserMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', handleEscape);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
         };
     }, []);
 
@@ -45,17 +69,55 @@ const NavBar = () => {
                 <div className="flex items-center gap-4">
                     {/* Liens auth — cachés sur mobile */}
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
-                        <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
-                        <li>
-                            <a href="/register"
-                               className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
-                                S'inscrire
-                            </a>
-                        </li>
+                        {user ? (
+                            <li className="relative" ref={userMenuRef}>
+                                <button
+                                    type="button"
+                                    className="flex items-center gap-2 text-bleu hover:opacity-75 transition-opacity"
+                                    aria-haspopup="menu"
+                                    aria-expanded={isUserMenuOpen}
+                                    onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                                >
+                                    <img
+                                        src={user.avatarUrl}
+                                        alt={user.fullName}
+                                        className="w-8 h-8 rounded-full object-cover"
+                                        onError={(e) => {
+                                            e.currentTarget.src = "/uploads/avatars/default-avatar.png";
+                                        }}
+                                    />
+                                    <span>{user.fullName}</span>
+                                </button>
+                                {isUserMenuOpen && (
+                                    <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                        <form method="post" action="/logout">
+                                            <button
+                                                type="submit"
+                                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-red-600"
+                                            >
+                                                Se déconnecter
+                                            </button>
+                                        </form>
+                                    </div>
+                                )}
+                            </li>
+                        ) : (
+                            <>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
+                                <li>
+                                    <a href="/register" className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                                        S'inscrire
+                                    </a>
+                                </li>
+                            </>
+                        )}
                     </ul>
 
                     {/* Hamburger librairie — visible sur mobile uniquement */}
-                    <div className="min-lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+                    <div className="min-lg:hidden" onClick={() => {
+                        setIsOpen(!isOpen);
+                        setIsUserMenuOpen(false);
+                    }}>
                         <div className="hamburger hamburger--3dx">
                             <div className="hamburger-box">
                                 <div className="hamburger-inner"></div>
@@ -76,12 +138,44 @@ const NavBar = () => {
                         <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                     <ul className="flex flex-col gap-3 list-none">
-                        <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
-                        <li>
-                            <a href="/register"
-                               className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
-                        </li>
+                        {user ? (
+                            <>
+                                <li>
+                                <a href="/profile" className="flex items-center gap-2 hover:opacity-75 transition-opacity">
+                                    <img
+                                        src={user.avatarUrl}
+                                        alt={user.fullName}
+                                        className="w-8 h-8 rounded-full object-cover"
+                                        onError={(e) => {
+                                            e.currentTarget.src = "/uploads/avatars/default-avatar.png";
+                                        }}
+                                    />
+                                    <span>{user.fullName}</span>
+                                </a>
+                                </li>
+                                <li>
+                                    <form method="post" action="/logout">
+                                        <button
+                                            type="submit"
+                                            className="inline-block w-full text-left bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity"
+                                        >
+                                            Se déconnecter
+                                        </button>
+                                    </form>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                                <li>
+                                    <a href="/register" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">
+                                        S'inscrire
+                                    </a>
+                                </li>
+                            </>
+                        )}
                     </ul>
+
                 </div>
             )}
         </nav>

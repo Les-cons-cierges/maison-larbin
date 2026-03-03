@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const DEFAULT_AVATAR = 'default-avatar.png';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -136,6 +138,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar = null;
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar ?: self::DEFAULT_AVATAR;
+    }
+
+    public function setAvatar(?string $avatar): static
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -193,7 +209,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->entreprises->add($entreprise);
             $entreprise->setOwner($this);
         }
- 
+
         return $this;
     }
 

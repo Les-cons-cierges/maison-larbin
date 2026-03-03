@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé{% endblock %}
+
+{% block body %}
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
+
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
+
+        .login-subtitle {
+            margin: 0.9rem 0 0;
+            color: #475569;
+            line-height: 1.55;
+        }
+
+        .login-note {
+            margin-top: 1rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .login-note a {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .login-footer {
+            margin-top: 1.25rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        .login-footer a {
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Email envoyé</h1>
+            <p class="login-subtitle">
+                Si un compte existe avec cet email, un message contenant un lien de réinitialisation vient d'être envoyé.
+                Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <p class="login-note">
+                Si vous ne recevez rien, vérifiez vos spams ou
+                <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.
+            </p>
+
+            <p class="login-footer"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
+        </div>
+    </section>
+{% endblock %}

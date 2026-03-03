@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau mot de passe{% endblock %}
+
+{% block body %}
+    <style>
+        .login-page {
+            min-height: calc(100vh - 96px);
+            display: grid;
+            place-items: center;
+            padding: 2rem 1rem;
+            background: #f5f7fb;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+            padding: 2rem;
+        }
+
+        .login-title {
+            margin: 0;
+            color: #0f172a;
+            font-size: 2rem;
+            line-height: 1.1;
+        }
+
+        .login-subtitle {
+            margin: 0.5rem 0 1.4rem;
+            color: #64748b;
+        }
+
+        .login-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .login-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 0.75rem 0.9rem;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-input:focus {
+            border-color: var(--color-bleu);
+            box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+        }
+
+        .login-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--color-bleu);
+        }
+
+        .login-btn:hover {
+            opacity: 0.92;
+        }
+
+        .login-form ul {
+            margin: 0.35rem 0 0;
+            padding-left: 1rem;
+            color: #b91c1c;
+            font-size: 0.9rem;
+        }
+
+        .login-footer {
+            margin-top: 1.25rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        .login-footer a {
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
+
+    <section class="login-page">
+        <div class="login-card">
+            <h1 class="login-title">Nouveau mot de passe</h1>
+            <p class="login-subtitle">Choisissez un mot de passe sécurisé pour votre compte.</p>
+
+            {{ form_start(resetForm, { attr: { class: 'login-form' } }) }}
+                {{ form_row(resetForm.plainPassword.first, {
+                    label: 'Nouveau mot de passe',
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input', autocomplete: 'new-password' }
+                }) }}
+                {{ form_row(resetForm.plainPassword.second, {
+                    label: 'Confirmer le mot de passe',
+                    label_attr: { class: 'login-label' },
+                    attr: { class: 'login-input', autocomplete: 'new-password' }
+                }) }}
+                <button class="login-btn" type="submit">Mettre à jour le mot de passe</button>
+            {{ form_end(resetForm) }}
+
+            <p class="login-footer"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
+        </div>
+    </section>
+{% endblock %}
