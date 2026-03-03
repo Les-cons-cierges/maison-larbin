@@ -1,9 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 const logo = '/logo2.png';
 import '../../../styles/app.css';
 
 const NavBar = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const userMenuRef = useRef(null);
 
     useEffect(() => {
         const hamburgers = document.querySelectorAll(".hamburger");
@@ -16,6 +18,28 @@ const NavBar = ({ user }) => {
             hamburgers.forEach((hamburger) => {
                 hamburger.replaceWith(hamburger.cloneNode(true));
             });
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+                setIsUserMenuOpen(false);
+            }
+        };
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                setIsUserMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', handleEscape);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
         };
     }, []);
 
@@ -46,8 +70,14 @@ const NavBar = ({ user }) => {
                     {/* Liens auth — cachés sur mobile */}
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
                         {user ? (
-                            <li>
-                                <a href="/profile" className="flex items-center gap-2 text-bleu hover:opacity-75 transition-opacity">
+                            <li className="relative" ref={userMenuRef}>
+                                <button
+                                    type="button"
+                                    className="flex items-center gap-2 text-bleu hover:opacity-75 transition-opacity"
+                                    aria-haspopup="menu"
+                                    aria-expanded={isUserMenuOpen}
+                                    onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                                >
                                     <img
                                         src={user.avatarUrl}
                                         alt={user.fullName}
@@ -57,7 +87,19 @@ const NavBar = ({ user }) => {
                                         }}
                                     />
                                     <span>{user.fullName}</span>
-                                </a>
+                                </button>
+                                {isUserMenuOpen && (
+                                    <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                        <form method="post" action="/logout">
+                                            <button
+                                                type="submit"
+                                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-red-600"
+                                            >
+                                                Se déconnecter
+                                            </button>
+                                        </form>
+                                    </div>
+                                )}
                             </li>
                         ) : (
                             <>
@@ -72,7 +114,10 @@ const NavBar = ({ user }) => {
                     </ul>
 
                     {/* Hamburger librairie — visible sur mobile uniquement */}
-                    <div className="min-lg:hidden" onClick={() => setIsOpen(!isOpen)}>
+                    <div className="min-lg:hidden" onClick={() => {
+                        setIsOpen(!isOpen);
+                        setIsUserMenuOpen(false);
+                    }}>
                         <div className="hamburger hamburger--3dx">
                             <div className="hamburger-box">
                                 <div className="hamburger-inner"></div>
@@ -94,7 +139,8 @@ const NavBar = ({ user }) => {
                     </ul>
                     <ul className="flex flex-col gap-3 list-none">
                         {user ? (
-                            <li>
+                            <>
+                                <li>
                                 <a href="/profile" className="flex items-center gap-2 hover:opacity-75 transition-opacity">
                                     <img
                                         src={user.avatarUrl}
@@ -106,7 +152,18 @@ const NavBar = ({ user }) => {
                                     />
                                     <span>{user.fullName}</span>
                                 </a>
-                            </li>
+                                </li>
+                                <li>
+                                    <form method="post" action="/logout">
+                                        <button
+                                            type="submit"
+                                            className="inline-block w-full text-left bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity"
+                                        >
+                                            Se déconnecter
+                                        </button>
+                                    </form>
+                                </li>
+                            </>
                         ) : (
                             <>
                                 <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
