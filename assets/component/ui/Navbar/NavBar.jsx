@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 const logo = '/logo2.png';
 import '../../../styles/app.css';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -45,13 +45,30 @@ const NavBar = () => {
                 <div className="flex items-center gap-4">
                     {/* Liens auth — cachés sur mobile */}
                     <ul className="max-lg:hidden flex gap-4 list-none items-center">
-                        <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
-                        <li>
-                            <a href="/register"
-                               className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
-                                S'inscrire
-                            </a>
-                        </li>
+                        {user ? (
+                            <li>
+                                <a href="/profile" className="flex items-center gap-2 text-bleu hover:opacity-75 transition-opacity">
+                                    <img
+                                        src={user.avatarUrl}
+                                        alt={user.fullName}
+                                        className="w-8 h-8 rounded-full object-cover"
+                                        onError={(e) => {
+                                            e.currentTarget.src = "/uploads/avatars/default-avatar.png";
+                                        }}
+                                    />
+                                    <span>{user.fullName}</span>
+                                </a>
+                            </li>
+                        ) : (
+                            <>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
+                                <li>
+                                    <a href="/register" className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                                        S'inscrire
+                                    </a>
+                                </li>
+                            </>
+                        )}
                     </ul>
 
                     {/* Hamburger librairie — visible sur mobile uniquement */}
@@ -76,12 +93,32 @@ const NavBar = () => {
                         <li><a href="/contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                     <ul className="flex flex-col gap-3 list-none">
-                        <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
-                        <li>
-                            <a href="/register"
-                               className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">S'inscrire</a>
-                        </li>
+                        {user ? (
+                            <li>
+                                <a href="/profile" className="flex items-center gap-2 hover:opacity-75 transition-opacity">
+                                    <img
+                                        src={user.avatarUrl}
+                                        alt={user.fullName}
+                                        className="w-8 h-8 rounded-full object-cover"
+                                        onError={(e) => {
+                                            e.currentTarget.src = "/uploads/avatars/default-avatar.png";
+                                        }}
+                                    />
+                                    <span>{user.fullName}</span>
+                                </a>
+                            </li>
+                        ) : (
+                            <>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                                <li>
+                                    <a href="/register" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">
+                                        S'inscrire
+                                    </a>
+                                </li>
+                            </>
+                        )}
                     </ul>
+
                 </div>
             )}
         </nav>
