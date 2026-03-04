@@ -18,14 +18,14 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('email')
             ->add('password')
-            ->add('roles')
+            ->add('role')
             ->add('created_at', null, [
                 'widget' => 'single_text',
             ])
             ->add('updated_at', null, [
                 'widget' => 'single_text',
             ])
-            ->add('id_entreprise', EntityType::class, [
+            ->add('entreprise', EntityType::class, [
                 'class' => Entreprise::class,
                 'choice_label' => 'id',
             ])
