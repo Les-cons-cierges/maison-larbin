@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Entreprise;
 use App\Entity\User;
 use App\Controller\Admin\ClientUserCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -33,8 +34,10 @@ class DasboardClientController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkTo(ClientUserCrudController::class, 'User', 'fas fa-users');
-        yield MenuItem::linkTo(EntrepriseCrudController::class,'Entreprise', 'fas fa-building');
+        yield MenuItem::linkTo(ClientUserCrudController::class, 'User', 'fas fa-users')
+            ->setAction('index');
+        yield MenuItem::linkTo(EntrepriseCrudController::class, 'Entreprise', 'fas fa-building')
+            ->setAction('index');
         // yield MenuItem::linkToRoute('Abonnement', 'fas fa-credit-card', 'subscription_index');
     }
 }
