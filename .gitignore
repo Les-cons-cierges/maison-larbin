@@ -193,3 +193,12 @@ node_modules/*
 /node_modules/
 /node_modules
 /node_modules/*
+
+
+# Avatar
+public/uploads*
+public/uploads
+/public/uploads*
+/public/uploads
+/public/uploads/*
+/public/uploads/
