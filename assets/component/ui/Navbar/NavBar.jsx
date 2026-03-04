@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
+import '../../../styles/app.css';
 
 const logo = '/logo2.png';
-import '../../../styles/app.css';
 
 const NavBar = ({user}) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,8 +47,8 @@ const NavBar = ({user}) => {
 
     return (
         <nav
-            className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10000 bg-white top-0 right-0 left-0 h-[50px]">
-            <div className="flex justify-between items-center px-12 py-2 p-8">
+            className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10000 bg-white top-0 right-0 left-0">
+            <div className="flex justify-between items-center px-12 py-2">
 
                 {/* Logo */}
                 <div>
@@ -67,7 +67,6 @@ const NavBar = ({user}) => {
                         </li>
                         <li><a href="#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a>
                         </li>
-                        <li><a href="/maps" className="hover:opacity-75 transition-opacity text-bleu">Maps</a></li>
                     </ul>
                 </div>
 
@@ -97,11 +96,13 @@ const NavBar = ({user}) => {
                                 {isUserMenuOpen && (
                                     <div
                                         className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
-                                        <a
-                                            href="/profil"
-                                            className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
-                                        >
-                                            Voir mon profil
+                                        <a href="/profil"
+                                           className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                            Mon profil
+                                        </a>
+                                        <a href="/maps"
+                                           className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                            Recherche maps
                                         </a>
                                         {isCadre && (
                                             <a
@@ -153,31 +154,15 @@ const NavBar = ({user}) => {
             {/* Menu mobile déroulant */}
             {isOpen && (
                 <div className="px-12 pb-4 flex flex-col gap-4">
-                    <ul className="flex flex-col gap-3 list-none">
+                    <ul className="flex flex-col gap-5 list-none mt-5">
                         <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
                         <li><a href="#cards" className="hover:opacity-75 transition-opacity">Services</a></li>
                         <li><a href="#about" className="hover:opacity-75 transition-opacity">À propos</a></li>
                         <li><a href="#contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
-                        <li><a href="/maps" className="hover:opacity-75 transition-opacity">Maps</a></li>
                     </ul>
-                    <ul className="flex flex-col gap-3 list-none">
+                    <ul className="flex flex-col gap-5 list-none">
                         {user ? (
                             <>
-                                <li>
-                                    <a
-                                        href="/profil"
-                                        className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
-                                    >
-                                        Voir mon profil
-                                    </a>
-                                </li>
-                                {isCadre && (
-                                    <li>
-                                    <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity">
-                                    Envoyer une requête
-                                    </a>
-                                    </li>
-                                    )}
                                 <li>
                                     <a href="/profil"
                                        className="flex items-center gap-2 hover:opacity-75 transition-opacity">
@@ -190,6 +175,23 @@ const NavBar = ({user}) => {
                                             }}
                                         />
                                         <span>{user.fullName}</span>
+                                    </a>
+                                </li>
+                                <hr/>
+                                <li><a href="/maps" className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
+                                {isCadre && (
+                                    <li>
+                                        <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity px-4 py-2">
+                                            Envoyer une requête
+                                        </a>
+                                    </li>
+                                )}
+                                <li>
+                                    <a
+                                        href="/profil"
+                                        className="hover:opacity-75 transition-opacity px-4 py-2"
+                                    >
+                                        Voir mon profil
                                     </a>
                                 </li>
                                 <li>
