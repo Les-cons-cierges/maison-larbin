@@ -44,7 +44,7 @@ const NavBar = ({ user }) => {
     }, []);
 
     return (
-        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0 h-[50px]">
+        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] relative z-10">
             <div className="flex justify-between items-center px-12 py-2 p-8">
 
                 {/* Logo */}
@@ -58,9 +58,9 @@ const NavBar = ({ user }) => {
                 <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
                         <li><a href="/" className="hover:opacity-75 transition-opacity text-bleu">Accueil</a></li>
-                        <li><a href="/#cards" className="hover:opacity-75 transition-opacity text-bleu">Services</a></li>
-                        <li><a href="/#about" className="hover:opacity-75 transition-opacity text-bleu">À propos</a></li>
-                        <li><a href="/contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a></li>
+                        <li><a href="#cards" className="hover:opacity-75 transition-opacity text-bleu">Services</a></li>
+                        <li><a href="#about" className="hover:opacity-75 transition-opacity text-bleu">À propos</a></li>
+                        <li><a href="#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a></li>
                         <li><a href="/maps" className="hover:opacity-75 transition-opacity text-bleu">Maps</a></li>
                     </ul>
                 </div>
