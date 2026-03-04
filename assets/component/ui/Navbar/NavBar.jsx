@@ -44,8 +44,8 @@ const NavBar = ({ user }) => {
     }, []);
 
     return (
-        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0 h-[50px]">
-            <div className="flex justify-between items-center px-12 py-2 p-8">
+        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0">
+            <div className="flex justify-between items-center px-12 h-[50px]">
 
                 {/* Logo */}
                 <div>
@@ -137,7 +137,7 @@ const NavBar = ({ user }) => {
 
             {/* Menu mobile déroulant */}
             {isOpen && (
-                <div className="px-12 pb-4 flex flex-col gap-4">
+                <div className="px-12 pb-4 flex flex-col gap-4 bg-white">
                     <ul className="flex flex-col gap-3 list-none">
                         <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
                         <li><a href="#cards" className="hover:opacity-75 transition-opacity">Services</a></li>
@@ -149,16 +149,16 @@ const NavBar = ({ user }) => {
                         {user ? (
                             <>
                                 <li>
-                                <a href="/profile" className="flex items-center gap-2 hover:opacity-75 transition-opacity">
+                                <a href="/profile" className="flex align-items-center items-center gap-2 hover:opacity-75 transition-opacity bg-bleu rounded-lg p-1 color-white">
                                     <img
                                         src={user.avatarUrl}
                                         alt={user.fullName}
-                                        className="w-8 h-8 rounded-full object-cover"
+                                        className="w-8 h-8 rounded-full object-cover border-2 border-white"
                                         onError={(e) => {
                                             e.currentTarget.src = "/uploads/avatars/default-avatar.png";
                                         }}
                                     />
-                                    <span>{user.fullName}</span>
+                                    <span className="text-white">{user.fullName}</span>
                                 </a>
                                 </li>
                                 <li>
