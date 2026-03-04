@@ -4,8 +4,23 @@
 
 {% block body %}
     <style>
+        html,
         body {
             background-color: #000;
+            min-height: 100vh;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #error404 {
+            flex: 1 0 auto;
+        }
+
+        #footer {
+            margin-top: auto;
         }
     </style>
     {# block d'insertion du component Home (le script est dans base.html.twig et main.jsx) #}
