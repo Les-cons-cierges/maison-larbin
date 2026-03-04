@@ -7,27 +7,27 @@
     <h1>Gestion de profil</h1>
 
     {% for message in app.flashes('success') %}
-        <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #bbf7d0; background: #f0fdf4; color: #166534;">
-            {{ message }}
-        </div>
+    <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #bbf7d0; background: #f0fdf4; color: #166534;">
+        {{ message }}
+    </div>
     {% endfor %}
 
     {% for message in app.flashes('error') %}
-        <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c;">
-            {{ message }}
-        </div>
+    <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c;">
+        {{ message }}
+    </div>
     {% endfor %}
 
     <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
         <div>
             {{ form_start(profilForm) }}
-                {{ form_row(profilForm.nom) }}
-                {{ form_row(profilForm.prenom) }}
-                {{ form_row(profilForm.email) }}
-                {{ form_row(profilForm.plainPassword) }}
-                {{ form_row(profilForm.avatarFile) }}
+            {{ form_row(profilForm.nom) }}
+            {{ form_row(profilForm.prenom) }}
+            {{ form_row(profilForm.email) }}
+            {{ form_row(profilForm.plainPassword) }}
+            {{ form_row(profilForm.avatarFile) }}
 
-                <button type="submit" style="padding: .7rem 1rem;">Enregistrer</button>
+            <button type="submit" style="padding: .7rem 1rem;">Enregistrer</button>
             {{ form_end(profilForm) }}
         </div>
 
@@ -35,19 +35,32 @@
             <h2>Informations</h2>
 
             {% if user.avatar %}
-                <div style="margin-bottom: 1rem;">
-                    <img
-                        src="{{ asset('uploads/avatars/' ~ user.avatar) }}"
-                        alt="Avatar actuel"
-                        style="width: 96px; height: 96px; object-fit: cover; border-radius: 999px;"
-                    >
-                </div>
+            <div style="margin-bottom: 1rem;">
+                <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="Avatar actuel"
+                    style="width: 96px; height: 96px; object-fit: cover; border-radius: 999px;">
+            </div>
             {% endif %}
 
-            <p><strong>Rôles :</strong> {{ user.roles|join(', ') }}</p>
+            {% set roleLabels = {
+            'ROLE_EMPLOYE': 'Employé',
+            'ROLE_CADRE': 'Cadre',
+            'ROLE_DIRECTION': 'Direction',
+            'ROLE_ADMINCLIENT': 'Admin',
+            'ROLE_STAFF': 'Staff',
+            'ROLE_ADMIN': 'Super Admin'
+            } %}
+
+            {% set displayRoles = [] %}
+            {% for role in user.roles %}
+            {% set displayRoles = displayRoles|merge([roleLabels[role] ?? role]) %}
+            {% endfor %}
+
+            <p><strong>Rôles :</strong> {{ displayRoles|join(', ') }}</p>
+
             <p><strong>Entreprise :</strong> {{ entrepriseName }}</p>
             <p><strong>Créé le :</strong> {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : 'Non défini' }}</p>
-            <p><strong>Mis à jour le :</strong> {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : 'Non défini' }}</p>
+            <p><strong>Mis à jour le :</strong> {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : 'Non défini' }}
+            </p>
         </aside>
     </div>
 </section>

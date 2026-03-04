@@ -35,7 +35,7 @@ class ProfilType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new Length(
-                        min: 8,
+                        min: 0,
                         minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.'
                     ),
                 ],
