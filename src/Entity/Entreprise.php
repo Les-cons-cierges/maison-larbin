@@ -263,4 +263,9 @@ class Entreprise
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nom ?? sprintf('Entreprise #%d', $this->id ?? 0);
+    }
 }
