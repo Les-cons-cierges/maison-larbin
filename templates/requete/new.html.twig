@@ -3,24 +3,46 @@
 {% block title %}Faire une requête{% endblock %}
 
 {% block body %}
-    <section style="max-width: 720px; margin: 40px auto; padding: 0 16px;">
-        <h1>Faire une requête</h1>
+    <section class="request-page">
+        <div class="request-card">
+            <h1 class="request-title">Faire une requête</h1>
+            <p class="request-subtitle">Décrivez votre besoin, Maison Larbin reviendra vers vous rapidement.</p>
 
-        {% for message in app.flashes('success') %}
-            <p style="color: #166534;">{{ message }}</p>
-        {% endfor %}
+            {% for message in app.flashes('success') %}
+                <p class="flash flash-success">{{ message }}</p>
+            {% endfor %}
 
-        {% for message in app.flashes('error') %}
-            <p style="color: #b91c1c;">{{ message }}</p>
-        {% endfor %}
+            {% for message in app.flashes('error') %}
+                <p class="flash flash-error">{{ message }}</p>
+            {% endfor %}
 
-        {{ form_start(form) }}
-        {{ form_row(form.titre) }}
-        {{ form_row(form.categorie) }}
-        {{ form_row(form.dateSouhaitee) }}
-        {{ form_row(form.description) }}
+            {{ form_start(form, { attr: { class: 'request-form' } }) }}
+                <div class="field">
+                    {{ form_label(form.titre) }}
+                    {{ form_widget(form.titre, { attr: { class: 'input' } }) }}
+                    {{ form_errors(form.titre) }}
+                </div>
 
-        <button type="submit">Envoyer la requête</button>
-        {{ form_end(form) }}
+                <div class="field">
+                    {{ form_label(form.categorie) }}
+                    {{ form_widget(form.categorie, { attr: { class: 'input' } }) }}
+                    {{ form_errors(form.categorie) }}
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.dateSouhaitee) }}
+                    {{ form_widget(form.dateSouhaitee, { attr: { class: 'input' } }) }}
+                    {{ form_errors(form.dateSouhaitee) }}
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description, { attr: { class: 'input textarea' } }) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <button type="submit" class="request-btn">Envoyer la requête</button>
+            {{ form_end(form) }}
+        </div>
     </section>
 {% endblock %}

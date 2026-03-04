@@ -135,3 +135,116 @@ h6 {
     align-items: center;
     padding: 0;
 }
+
+.request-page {
+    min-height: calc(100vh - 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.request-card {
+    width: 100%;
+    max-width: 760px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    padding: 28px;
+    margin-top: 56px;
+}
+
+.request-title {
+    margin: 0 0 6px;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    color: #0f172a;
+}
+
+.request-subtitle {
+    margin: 0 0 22px;
+    color: #475569;
+}
+
+.request-form {
+    display: grid;
+    gap: 14px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.input {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #fff;
+    padding: 11px 12px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #0f172a;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12);
+}
+
+.textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.request-btn {
+    margin-top: 6px;
+    border: 0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #fff;
+    background: var(--color-bleu);
+    transition: opacity 0.2s, transform 0.08s;
+}
+
+.request-btn:hover {
+    opacity: 0.92;
+}
+
+.request-btn:active {
+    transform: translateY(1px);
+}
+
+.flash {
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+}
+
+.flash-success {
+    background: #ecfdf3;
+    border: 1px solid #86efac;
+    color: #166534;
+}
+
+.flash-error {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+.field ul {
+    margin-top: 6px;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    list-style: none;
+    padding: 0;
+}
