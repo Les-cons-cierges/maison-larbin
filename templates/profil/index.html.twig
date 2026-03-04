@@ -3,65 +3,186 @@
 {% block title %}Gestion de profil{% endblock %}
 
 {% block body %}
-<section class="profil-page" style="padding: 2rem 1rem; max-width: 860px; margin: 0 auto;">
-    <h1>Gestion de profil</h1>
+<style>
+    .profil-page {
+        min-height: calc(100vh - 96px);
+        display: grid;
+        place-items: center;
+        padding: 2rem 1rem;
+        background: #f5f7fb;
+    }
 
-    {% for message in app.flashes('success') %}
-    <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #bbf7d0; background: #f0fdf4; color: #166534;">
-        {{ message }}
-    </div>
-    {% endfor %}
+    .profil-card {
+        width: 100%;
+        max-width: 700px;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+        padding: 2rem;
+    }
 
-    {% for message in app.flashes('error') %}
-    <div style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c;">
-        {{ message }}
-    </div>
-    {% endfor %}
+    .profil-title {
+        margin: 0;
+        color: #0f172a;
+        font-size: 2rem;
+        line-height: 1.1;
+    }
 
-    <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-        <div>
-            {{ form_start(profilForm) }}
-            {{ form_row(profilForm.nom) }}
-            {{ form_row(profilForm.prenom) }}
-            {{ form_row(profilForm.email) }}
-            {{ form_row(profilForm.plainPassword) }}
-            {{ form_row(profilForm.avatarFile) }}
+    .profil-subtitle {
+        margin: 0.5rem 0 1.4rem;
+        color: #64748b;
+    }
 
-            <button type="submit" style="padding: .7rem 1rem;">Enregistrer</button>
-            {{ form_end(profilForm) }}
+    .profil-form {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .profil-label {
+        display: block;
+        margin-bottom: 0.4rem;
+        color: #334155;
+        font-weight: 600;
+    }
+
+    .profil-input {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 0.75rem 0.9rem;
+        font-size: 1rem;
+        outline: none;
+    }
+
+    .profil-input:focus {
+        border-color: var(--color-bleu);
+        box-shadow: 0 0 0 3px rgba(27, 71, 93, 0.14);
+    }
+
+    .profil-btn {
+        border: 0;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        background: var(--color-bleu);
+    }
+
+    .profil-btn:hover {
+        opacity: 0.92;
+    }
+
+    .profil-error {
+        border: 1px solid #fecaca;
+        background: #fef2f2;
+        color: #b91c1c;
+        border-radius: 12px;
+        padding: 0.7rem 0.85rem;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .profil-form>div {
+        margin: 0;
+    }
+
+    .profil-form ul {
+        margin: 0.35rem 0 0;
+        padding-left: 1rem;
+        color: #b91c1c;
+        font-size: 0.9rem;
+    }
+</style>
+
+<section class="profil-page">
+    <div class="profil-card">
+        <h1 class="profil-title">Gestion de profil</h1>
+
+        {% for message in app.flashes('success') %}
+        <div
+            style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #bbf7d0; background: #f0fdf4; color: #166534;">
+            {{ message }}
         </div>
+        {% endfor %}
 
-        <aside>
-            <h2>Informations</h2>
+        {% for message in app.flashes('error') %}
+        <div
+            style="margin: 1rem 0; padding: .75rem 1rem; border: 1px solid #fecaca; background: #fef2f2; color: #b91c1c;">
+            {{ message }}
+        </div>
+        {% endfor %}
 
-            {% if user.avatar %}
-            <div style="margin-bottom: 1rem;">
-                <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="Avatar actuel"
-                    style="width: 96px; height: 96px; object-fit: cover; border-radius: 999px;">
+        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div>
+                {{ form_start(profilForm, { attr: { class: 'profil-form' } }) }}
+                {{ form_errors(profilForm, { attr: { class: 'profil-error' } }) }}
+
+                {{ form_row(profilForm.nom, {
+                    row_attr: { class: 'profil-field' },
+                    label_attr: { class: 'profil-label' },
+                    attr: { class: 'profil-input' }
+                }) }}
+                {{ form_row(profilForm.prenom, {
+                    row_attr: { class: 'profil-field' },
+                    label_attr: { class: 'profil-label' },
+                    attr: { class: 'profil-input' }
+                }) }}
+                {{ form_row(profilForm.email, {
+                    row_attr: { class: 'profil-field' },
+                    label_attr: { class: 'profil-label' },
+                    attr: { class: 'profil-input' }
+                }) }}
+                {{ form_row(profilForm.plainPassword, {
+                    row_attr: { class: 'profil-field' },
+                    label_attr: { class: 'profil-label' },
+                    attr: { class: 'profil-input' }
+                }) }}
+                {{ form_row(profilForm.avatarFile, {
+                    row_attr: { class: 'profil-field' },
+                    label_attr: { class: 'profil-label' },
+                    attr: { class: 'profil-input' }
+                }) }}
+
+                <button type="submit" class="profil-btn">Enregistrer</button>
+                {{ form_end(profilForm) }}
             </div>
-            {% endif %}
 
-            {% set roleLabels = {
-            'ROLE_EMPLOYE': 'Employé',
-            'ROLE_CADRE': 'Cadre',
-            'ROLE_DIRECTION': 'Direction',
-            'ROLE_ADMINCLIENT': 'Admin',
-            'ROLE_STAFF': 'Staff',
-            'ROLE_ADMIN': 'Super Admin'
-            } %}
+            <aside>
+                <h2 class="profil-title">Informations</h2>
 
-            {% set displayRoles = [] %}
-            {% for role in user.roles %}
-            {% set displayRoles = displayRoles|merge([roleLabels[role] ?? role]) %}
-            {% endfor %}
+                {% if user.avatar %}
+                <div style="margin-bottom: 1rem;">
+                    <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="Avatar actuel"
+                        style="width: 96px; height: 96px; object-fit: cover; border-radius: 999px;">
+                </div>
+                {% endif %}
 
-            <p><strong>Rôles :</strong> {{ displayRoles|join(', ') }}</p>
+                {% set roleLabels = {
+                'ROLE_EMPLOYE': 'Employé',
+                'ROLE_CADRE': 'Cadre',
+                'ROLE_DIRECTION': 'Direction',
+                'ROLE_ADMINCLIENT': 'Admin',
+                'ROLE_STAFF': 'Staff',
+                'ROLE_ADMIN': 'Super Admin'
+                } %}
 
-            <p><strong>Entreprise :</strong> {{ entrepriseName }}</p>
-            <p><strong>Créé le :</strong> {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : 'Non défini' }}</p>
-            <p><strong>Mis à jour le :</strong> {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : 'Non défini' }}
-            </p>
-        </aside>
+                {% set displayRoles = [] %}
+                {% for role in user.roles %}
+                {% set displayRoles = displayRoles|merge([roleLabels[role] ?? role]) %}
+                {% endfor %}
+
+                <p><strong>Rôles :</strong> {{ displayRoles|join(', ') }}</p>
+
+                <p><strong>Entreprise :</strong> {{ entrepriseName }}</p>
+                <p><strong>Créé le :</strong> {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : 'Non défini' }}</p>
+                <p><strong>Mis à jour le :</strong> {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : 'Non défini'
+                    }}
+                </p>
+            </aside>
+        </div>
     </div>
+
 </section>
 {% endblock %}
