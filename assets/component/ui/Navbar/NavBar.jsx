@@ -1,8 +1,9 @@
 import {useEffect, useRef, useState} from 'react';
+
 const logo = '/logo2.png';
 import '../../../styles/app.css';
 
-const NavBar = ({ user }) => {
+const NavBar = ({user}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const userMenuRef = useRef(null);
@@ -45,8 +46,9 @@ const NavBar = ({ user }) => {
     }, []);
 
     return (
-        <nav className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0">
-            <div className="flex justify-between items-center px-12 h-[50px]">
+        <nav
+            className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0 h-[50px]">
+            <div className="flex justify-between items-center px-12 py-2 p-8">
 
                 {/* Logo */}
                 <div>
@@ -59,9 +61,12 @@ const NavBar = ({ user }) => {
                 <div className=" max-lg:hidden">
                     <ul className="flex gap-6 list-none">
                         <li><a href="/" className="hover:opacity-75 transition-opacity text-bleu">Accueil</a></li>
-                        <li><a href="/#cards" className="hover:opacity-75 transition-opacity text-bleu">Services</a></li>
-                        <li><a href="/#about" className="hover:opacity-75 transition-opacity text-bleu">À propos</a></li>
-                        <li><a href="#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a></li>
+                        <li><a href="/#cards" className="hover:opacity-75 transition-opacity text-bleu">Services</a>
+                        </li>
+                        <li><a href="/#about" className="hover:opacity-75 transition-opacity text-bleu">À propos</a>
+                        </li>
+                        <li><a href="#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a>
+                        </li>
                         <li><a href="/maps" className="hover:opacity-75 transition-opacity text-bleu">Maps</a></li>
                     </ul>
                 </div>
@@ -90,7 +95,14 @@ const NavBar = ({ user }) => {
                                     <span>{user.fullName}</span>
                                 </button>
                                 {isUserMenuOpen && (
-                                    <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                    <div
+                                        className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                        <a
+                                            href="/profil"
+                                            className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
+                                        >
+                                            Voir mon profil
+                                        </a>
                                         {isCadre && (
                                             <a
                                                 href="/requete/nouvelle"
@@ -112,9 +124,11 @@ const NavBar = ({ user }) => {
                             </li>
                         ) : (
                             <>
-                                <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se connecter</a></li>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity text-bleu">Se
+                                    connecter</a></li>
                                 <li>
-                                    <a href="/register" className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
+                                    <a href="/register"
+                                       className="bg-bleu text-white rounded-lg px-4 p-2 hover:opacity-80 transition-opacity">
                                         S'inscrire
                                     </a>
                                 </li>
@@ -138,7 +152,7 @@ const NavBar = ({ user }) => {
 
             {/* Menu mobile déroulant */}
             {isOpen && (
-                <div className="px-12 pb-4 flex flex-col gap-4 bg-white">
+                <div className="px-12 pb-4 flex flex-col gap-4">
                     <ul className="flex flex-col gap-3 list-none">
                         <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
                         <li><a href="#cards" className="hover:opacity-75 transition-opacity">Services</a></li>
@@ -149,25 +163,34 @@ const NavBar = ({ user }) => {
                     <ul className="flex flex-col gap-3 list-none">
                         {user ? (
                             <>
+                                <li>
+                                    <a
+                                        href="/profil"
+                                        className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
+                                    >
+                                        Voir mon profil
+                                    </a>
+                                </li>
                                 {isCadre && (
                                     <li>
-                                        <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity">
-                                            Envoyer une requête
-                                        </a>
+                                    <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity">
+                                    Envoyer une requête
+                                    </a>
                                     </li>
-                                )}
+                                    )}
                                 <li>
-                                <a href="/profile" className="flex align-items-center items-center gap-2 hover:opacity-75 transition-opacity bg-bleu rounded-lg p-1 color-white">
-                                    <img
-                                        src={user.avatarUrl}
-                                        alt={user.fullName}
-                                        className="w-8 h-8 rounded-full object-cover border-2 border-white"
-                                        onError={(e) => {
-                                            e.currentTarget.src = "/uploads/avatars/default-avatar.png";
-                                        }}
-                                    />
-                                    <span className="text-white">{user.fullName}</span>
-                                </a>
+                                    <a href="/profil"
+                                       className="flex items-center gap-2 hover:opacity-75 transition-opacity">
+                                        <img
+                                            src={user.avatarUrl}
+                                            alt={user.fullName}
+                                            className="w-8 h-8 rounded-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = "/uploads/avatars/default-avatar.png";
+                                            }}
+                                        />
+                                        <span>{user.fullName}</span>
+                                    </a>
                                 </li>
                                 <li>
                                     <form method="post" action="/logout">
@@ -182,9 +205,11 @@ const NavBar = ({ user }) => {
                             </>
                         ) : (
                             <>
-                                <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a></li>
+                                <li><a href="/login" className="hover:opacity-75 transition-opacity">Se connecter</a>
+                                </li>
                                 <li>
-                                    <a href="/register" className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">
+                                    <a href="/register"
+                                       className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:opacity-80 transition-opacity">
                                         S'inscrire
                                     </a>
                                 </li>
