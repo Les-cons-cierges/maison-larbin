@@ -6,6 +6,7 @@ const NavBar = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const userMenuRef = useRef(null);
+    const isCadre = Array.isArray(user?.roles) && user.roles.includes('ROLE_CADRE');
 
     useEffect(() => {
         const hamburgers = document.querySelectorAll(".hamburger");
@@ -90,6 +91,14 @@ const NavBar = ({ user }) => {
                                 </button>
                                 {isUserMenuOpen && (
                                     <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                        {isCadre && (
+                                            <a
+                                                href="/requete/nouvelle"
+                                                className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
+                                            >
+                                                Envoyer une requête
+                                            </a>
+                                        )}
                                         <form method="post" action="/logout">
                                             <button
                                                 type="submit"
@@ -140,6 +149,13 @@ const NavBar = ({ user }) => {
                     <ul className="flex flex-col gap-3 list-none">
                         {user ? (
                             <>
+                                {isCadre && (
+                                    <li>
+                                        <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity">
+                                            Envoyer une requête
+                                        </a>
+                                    </li>
+                                )}
                                 <li>
                                 <a href="/profile" className="flex align-items-center items-center gap-2 hover:opacity-75 transition-opacity bg-bleu rounded-lg p-1 color-white">
                                     <img

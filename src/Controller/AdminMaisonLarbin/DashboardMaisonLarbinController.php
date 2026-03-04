@@ -73,6 +73,8 @@ class DashboardMaisonLarbinController extends AbstractDashboardController
             ->setAction('index');
         yield MenuItem::linkTo(EntrepriseCrudController::class, 'Entreprises clientes', 'fa fa-building')
             ->setAction('index');
+        yield MenuItem::linkTo(RequeteCrudController::class, 'Requetes', 'fa fa-inbox')
+            ->setAction('index');
     }
 
     /**
