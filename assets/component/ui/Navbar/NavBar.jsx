@@ -90,6 +90,14 @@ const NavBar = ({ user }) => {
                                 </button>
                                 {isUserMenuOpen && (
                                     <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+                                        <form method="post" action="/profil">
+                                            <button
+                                                type="submit"
+                                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-gray-400"
+                                            >
+                                                Voir mon profil
+                                            </button>
+                                        </form>
                                         <form method="post" action="/logout">
                                             <button
                                                 type="submit"
