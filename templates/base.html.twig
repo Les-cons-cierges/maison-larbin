@@ -33,7 +33,8 @@
     data-user='{{ app.user
     ? {
         fullName: app.user.prenom ~ ' ' ~ app.user.nom,
-        avatarUrl: asset('uploads/avatars/' ~ app.user.avatar)
+        avatarUrl: asset('uploads/avatars/' ~ app.user.avatar),
+        roles: app.user.roles
     }|json_encode|e('html_attr')
     : ''
     }}'
