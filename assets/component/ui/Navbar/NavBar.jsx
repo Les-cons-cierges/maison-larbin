@@ -47,7 +47,7 @@ const NavBar = ({user}) => {
 
     return (
         <nav
-            className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10 bg-white top-0 right-0 left-0 h-[50px]">
+            className="shadow-[0_2px_10px_rgba(0,0,0,0.15)] fixed w-[100%] z-10000 bg-white top-0 right-0 left-0 h-[50px]">
             <div className="flex justify-between items-center px-12 py-2 p-8">
 
                 {/* Logo */}
