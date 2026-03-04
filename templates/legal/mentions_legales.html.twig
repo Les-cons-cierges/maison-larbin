@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales{% endblock %}
+
+{% block body %}
+    <main class="min-h-[calc(100vh-96px)] bg-slate-50 px-4 pb-24 sm:px-6 sm:pb-28 lg:px-8" style="padding-top: 64px;">
+        <section class="mx-auto w-full max-w-3xl">
+            <h1 class="text-3xl font-bold text-slate-900 sm:text-4xl">Mentions Légales</h1>
+
+            <div class="mt-8 space-y-8 text-slate-700">
+                <section>
+                    <h2 class="text-xl font-semibold text-slate-900">Editeur du site</h2>
+                    <p class="mt-4">Le présent site web est édité par Maison Larbin.</p>
+                    <div class="mt-4 space-y-1">
+                        <p>SAS au capital de 4 euros.</p>
+                        <p>Immatriculée au Registre du commerce et des sociétés de Rouen sous le numéro SIRET : 12345678901234.</p>
+                        <p>Adresse : 1 rue des Larbins</p>
+                        <p>Téléphone : 0647390010</p>
+                        <p>Directeur de la publication : Json</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-slate-900">Hébergeur</h2>
+                    <p class="mt-4">Le présent site web est hébergé par :</p>
+                    <div class="mt-4 space-y-1">
+                        <p>Thomas Deville</p>
+                        <p>Siège social : Chez moi</p>
+                        <p>Tél. +33 (0)8 99 70 17 61</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+{% endblock %}
