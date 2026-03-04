@@ -29,4 +29,10 @@ final class HomeController extends AbstractController
     {
         return $this->render('legal/mentions_legales.html.twig');
     }
+
+    #[Route('/confidentialite', name: 'app_confidentialite')]
+    public function confidentialite(): Response
+    {
+        return $this->render('legal/confidentialite.html.twig');
+    }
 }
