@@ -9,7 +9,7 @@ const Home = ({title, username, cityCount}) => {
     return (// ou props
         <div>
             <HeroSection/>
-            <div id="cards" className="flex justify-center gap-10 m-5" itemProp={name}>
+            <div id="cards" className="min-lg: flex justify-center gap-10 m-5 flex-wrap" itemProp={name}>
                 <PricingCard/>
                 <PricingCard/>
                 <PricingCard/>

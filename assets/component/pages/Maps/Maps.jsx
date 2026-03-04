@@ -277,7 +277,7 @@ const Maps = () => {
 
     return (
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} libraries={['places']} apiOptions={{loading: 'async'}}>
-            <div className="relative flex flex-col md:flex-row w-screen h-screen overflow-hidden bg-bleu-sombre text-bleu">
+            <div className="relative flex flex-col md:flex-row w-screen h-[calc(100vh-50px)] mt-[50px] overflow-hidden bg-bleu-sombre text-bleu">
 
                 {/* ══ OVERLAY sombre sur mobile quand sidebar ouverte ══ */}
                 {sidebarOpen && (
@@ -292,7 +292,7 @@ const Maps = () => {
                     fixed md:relative
                     inset-x-0 bottom-0 md:inset-auto
                     z-30 md:z-10
-                    h-[85vh] md:h-screen
+                    h-[85vh] md:h-full
                     w-full md:w-80 md:min-w-80
                     bg-bleu-sombre border-t-2 md:border-t-0 md:border-r-2 border-orange-employe/30
                     rounded-t-3xl md:rounded-none
@@ -322,7 +322,7 @@ const Maps = () => {
                 </aside>
 
                 {/* ══ CARTE ══ */}
-                <div className="flex-1 relative h-screen">
+                <div className="flex-1 relative h-full">
                     <Map
                         key={mapKey}
                         mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID}
