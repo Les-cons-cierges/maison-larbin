@@ -2,6 +2,7 @@
 
 namespace App\Controller\AdminMaisonLarbin;
 
+use App\Controller\Admin\EntrepriseCrudController;
 use App\Entity\User;
 use App\Repository\EntrepriseRepository;
 use App\Repository\UserRepository;
@@ -68,8 +69,10 @@ class DashboardMaisonLarbinController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkTo(UserCrudController::class, 'Employes', 'fa fa-users');
-        yield MenuItem::linkTo(EntrepriseCrudController::class, 'Entreprises clientes', 'fa fa-building');
+        yield MenuItem::linkTo(UserCrudController::class, 'Employes', 'fa fa-users')
+            ->setAction('index');
+        yield MenuItem::linkTo(EntrepriseCrudController::class, 'Entreprises clientes', 'fa fa-building')
+            ->setAction('index');
     }
 
     /**
