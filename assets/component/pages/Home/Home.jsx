@@ -5,6 +5,19 @@ import ContactSection from "../../ui/Contact";
 
 const Home = ({title, username, cityCount}) => {
 
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash) {
+            // Petit délai pour laisser React finir le rendu
+            setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 100);
+        }
+    }, []);
+
     return (// ou props
         <div>
             <HeroSection/>
