@@ -109,7 +109,7 @@ const NavBar = ({user}) => {
                                         {isEmploye && (
                                             <a href="/maps"
                                                className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                Recherche maps
+                                                Autour de moi
                                             </a>
                                         )}
 
@@ -117,11 +117,11 @@ const NavBar = ({user}) => {
                                             <>
                                                 <a href="/requete/nouvelle"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Demandes
+                                                    Nouvelle demande
                                                 </a>
                                                 <a href="/maps"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Recherche maps
+                                                    Autour de moi
                                                 </a>
                                             </>
                                         )}
@@ -130,11 +130,11 @@ const NavBar = ({user}) => {
                                             <>
                                                 <a href="/requete/nouvelle"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Demandes
+                                                    Nouvelle demande
                                                 </a>
                                                 <a href="/maps"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Recherche maps
+                                                    Autour de moi
                                                 </a>
                                             </>
                                         )}
@@ -143,11 +143,11 @@ const NavBar = ({user}) => {
                                             <>
                                                 <a href="/requete/nouvelle"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Demandes
+                                                    Nouvelle demande
                                                 </a>
                                                 <a href="/maps"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Recherche maps
+                                                    Autour de moi
                                                 </a>
                                                 <a href="/adminClient"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
@@ -160,11 +160,11 @@ const NavBar = ({user}) => {
                                             <>
                                                 <a href="/requete/nouvelle"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Demandes
+                                                    Nouvelle demande
                                                 </a>
                                                 <a href="/maps"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                                    Recherche maps
+                                                    Autour de moi
                                                 </a>
                                                 <a href="/maison-larbin/admin"
                                                    className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
@@ -241,18 +241,30 @@ const NavBar = ({user}) => {
                                 <hr/>
 
                                 {isEmploye && (
-                                    <li><a href="/maps"
-                                           className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
+                                    <li><a href="/maps" className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
                                 )}
 
                                 {isCadre && (
                                     <>
                                         <li><a href="/maps"
-                                               className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
+                                               className="hover:opacity-75 transition-opacity px-4 py-2">Autour de moi</a></li>
                                         <li>
                                             <a href="/requete/nouvelle"
                                                className="hover:opacity-75 transition-opacity px-4 py-2">
-                                                Demandes
+                                                Nouvelle demande
+                                            </a>
+                                        </li>
+                                    </>
+                                )}
+
+                                {isDirection && (
+                                    <>
+                                        <li><a href="/maps"
+                                               className="hover:opacity-75 transition-opacity px-4 py-2">Autour de moi</a></li>
+                                        <li>
+                                            <a href="/requete/nouvelle"
+                                               className="hover:opacity-75 transition-opacity px-4 py-2">
+                                                Nouvelle demande
                                             </a>
                                         </li>
                                     </>
