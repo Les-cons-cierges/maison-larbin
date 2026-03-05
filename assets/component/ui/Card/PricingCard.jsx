@@ -109,8 +109,8 @@ export function PricingCard ({
             {/* CTA */}
             <button
                 onClick={onSubscribe}
-                className={`mt-auto w-full py-3.5 rounded-xl text-sm font-semibold transition-colors duration-200 ${btnBg}`}
-            >
+                href="/register"
+                className={`mt-auto w-full py-3.5 rounded-xl text-sm font-semibold transition-colors duration-200 text-center ${btnBg}`}>
                 Souscrire
             </button>
         </div>
