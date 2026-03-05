@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import HeroSection from "../../ui/Hero";
 import FeaturesSection from "../../ui/About";
 import PricingCard from "../../ui/Card";
@@ -23,7 +24,7 @@ const Home = ({title, username, cityCount}) => {
             <HeroSection/>
             <div id="cards" className="min-lg: flex justify-center gap-10 m-5 flex-wrap" itemProp={name}>
                 <PricingCard/>
-                <PricingCard/>
+                <PricingCard className="border-2 border-black!"/>
                 <PricingCard/>
             </div>
             <FeaturesSection/>
