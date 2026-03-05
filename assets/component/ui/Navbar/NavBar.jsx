@@ -69,7 +69,7 @@ const NavBar = ({user}) => {
                         </li>
                         <li><a href="/#about" className="hover:opacity-75 transition-opacity text-bleu">À propos</a>
                         </li>
-                        <li><a href="#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a>
+                        <li><a href="/#contact" className="hover:opacity-75 transition-opacity text-bleu">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -217,9 +217,9 @@ const NavBar = ({user}) => {
                 <div className="px-12 pb-4 flex flex-col gap-4">
                     <ul className="flex flex-col gap-5 list-none mt-5">
                         <li><a href="/" className="hover:opacity-75 transition-opacity">Accueil</a></li>
-                        <li><a href="#cards" className="hover:opacity-75 transition-opacity">Services</a></li>
-                        <li><a href="#about" className="hover:opacity-75 transition-opacity">À propos</a></li>
-                        <li><a href="#contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
+                        <li><a href="/#cards" className="hover:opacity-75 transition-opacity">Services</a></li>
+                        <li><a href="/#about" className="hover:opacity-75 transition-opacity">À propos</a></li>
+                        <li><a href="/#contact" className="hover:opacity-75 transition-opacity">Contact</a></li>
                     </ul>
                     <ul className="flex flex-col gap-5 list-none">
                         {user ? (
