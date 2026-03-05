@@ -119,6 +119,7 @@
 html {
     font-family: 'Nunito', sans-serif;
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* compense la hauteur de la navbar fixe */
 }
 
 h1,
