@@ -14,7 +14,7 @@ function CheckIcon() {
     return (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
+            <polyline points="20 6 9 17 4 12"/>
         </svg>
     );
 }
@@ -23,29 +23,30 @@ function BuildingIcon() {
     return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <path d="M3 9h18M9 21V9M15 21V9" />
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9M15 21V9"/>
         </svg>
     );
 }
 
-export function PricingCard ({
-    name = "PME",
-    employeesLabel = "1 à 50 employés",
-    subtitle = "Idéal pour les petites et moyennes structures",
-    monthlyPrice = 499,
-    annualPrice = 5489,
-    annualOldPrice = 5988,
-    features = [
-        "Accès plateforme employés",
-        "Pallier Cadres disponible",
-        "Support par email",
-        "Onboarding inclus",
-        "Facturation mensuelle ou annuelle",
-    ],
-    highlighted = false,
-    onSubscribe,
-}) {
+export function PricingCard({
+                                name = "PME",
+                                employeesLabel = "1 à 50 employés",
+                                subtitle = "Idéal pour les petites et moyennes structures",
+                                monthlyPrice = 499,
+                                annualPrice = 5489,
+                                annualOldPrice = 5988,
+                                features = [
+                                    "Accès plateforme employés",
+                                    "Pallier Cadres disponible",
+                                    "Support par email",
+                                    "Onboarding inclus",
+                                    "Facturation mensuelle ou annuelle",
+                                ],
+                                highlighted = false,
+                                onSubscribe,
+                                className = "",
+                            }) {
     const bg = highlighted ? "bg-black text-white" : "bg-white text-black";
     const border = highlighted ? "border-transparent" : "border-gray-200";
     const subtitleColor = highlighted ? "text-gray-400" : "text-gray-500";
@@ -61,7 +62,7 @@ export function PricingCard ({
 
     return (
         <div
-            className={`${bg} border ${border} rounded-2xl p-7 flex flex-col gap-6 w-full max-w-sm shadow-sm`}
+            className={`${bg} border ${border} rounded-2xl p-7 flex flex-col gap-6 w-full max-w-sm shadow-sm ${className}`}
         >
             {/* Header */}
             <div className="flex flex-col gap-3">
@@ -69,7 +70,7 @@ export function PricingCard ({
 
                 {/* Employees badge */}
                 <div className={`flex items-center gap-2 ${iconBg} w-fit px-3 py-1.5 rounded-lg`}>
-                    <BuildingIcon />
+                    <BuildingIcon/>
                     <span className="text-sm font-semibold">{employeesLabel}</span>
                 </div>
 
@@ -92,14 +93,14 @@ export function PricingCard ({
             </div>
 
             {/* Divider */}
-            <hr className={`border-t ${dividerColor}`} />
+            <hr className={`border-t ${dividerColor}`}/>
 
             {/* Features */}
             <ul className="flex flex-col gap-3">
                 {features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
                         <span className={`flex-shrink-0 ${checkColor}`}>
-                            <CheckIcon />
+                            <CheckIcon/>
                         </span>
                         <span className={`text-sm ${featureColor}`}>{feature}</span>
                     </li>
@@ -107,12 +108,12 @@ export function PricingCard ({
             </ul>
 
             {/* CTA */}
-            <button
+            <a
                 onClick={onSubscribe}
                 href="/register"
                 className={`mt-auto w-full py-3.5 rounded-xl text-sm font-semibold transition-colors duration-200 text-center ${btnBg}`}>
                 Souscrire
-            </button>
+            </a>
         </div>
     );
 }
