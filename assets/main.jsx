@@ -7,6 +7,7 @@ import NotFound from "./component/pages/NotFound";
 import NavBar from "./component/ui/Navbar";
 import Footer from "./component/ui/Footer/Footer";
 import Maps from "./component/pages/Maps/Maps";
+import Direction from "./component/pages/Direction/Direction";
 
 const appContainer = document.getElementById("app");
 if (appContainer) {
@@ -51,6 +52,11 @@ if (homeContainer) {
 const mapsContainer = document.getElementById("maps");
 if (mapsContainer) {
     createRoot(mapsContainer).render(< Maps/>);
+}
+
+const directionContainer = document.getElementById("hero-direction");
+if (directionContainer) {
+    createRoot(directionContainer).render(< Direction/>);
 }
 
 const error404Container = document.getElementById("error404");
