@@ -7,7 +7,11 @@ const NavBar = ({user}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const userMenuRef = useRef(null);
+    const isEmploye = Array.isArray(user?.roles) && user.roles.includes('ROLE_EMPLOYE');
     const isCadre = Array.isArray(user?.roles) && user.roles.includes('ROLE_CADRE');
+    const isDirection = Array.isArray(user?.roles) && user.roles.includes('ROLE_DIRECTION');
+    const isAdminEntreprise = Array.isArray(user?.roles) && user.roles.includes('ROLE_ADMIN');
+    const isMaisonLarbinAdmin = Array.isArray(user?.roles) && user.roles.includes('ROLE_ADMIN_STAFF');
 
     useEffect(() => {
         const hamburgers = document.querySelectorAll(".hamburger");
@@ -96,22 +100,79 @@ const NavBar = ({user}) => {
                                 {isUserMenuOpen && (
                                     <div
                                         className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white shadow-lg p-2 z-50">
+
                                         <a href="/profil"
                                            className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
                                             Mon profil
                                         </a>
-                                        <a href="/maps"
-                                           className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
-                                            Recherche maps
-                                        </a>
-                                        {isCadre && (
-                                            <a
-                                                href="/requete/nouvelle"
-                                                className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700"
-                                            >
-                                                Envoyer une requête
+
+                                        {isEmploye && (
+                                            <a href="/maps"
+                                               className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                Recherche maps
                                             </a>
                                         )}
+
+                                        {isCadre && (
+                                            <>
+                                                <a href="/requete/nouvelle"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Demandes
+                                                </a>
+                                                <a href="/maps"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Recherche maps
+                                                </a>
+                                            </>
+                                        )}
+
+                                        {isDirection && (
+                                            <>
+                                                <a href="/requete/nouvelle"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Demandes
+                                                </a>
+                                                <a href="/maps"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Recherche maps
+                                                </a>
+                                            </>
+                                        )}
+
+                                        {isAdminEntreprise && (
+                                            <>
+                                                <a href="/requete/nouvelle"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Demandes
+                                                </a>
+                                                <a href="/maps"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Recherche maps
+                                                </a>
+                                                <a href="/maps"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Dashborad Entreprise
+                                                </a>
+                                            </>
+                                        )}
+
+                                        {isMaisonLarbinAdmin && (
+                                            <>
+                                                <a href="/requete/nouvelle"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Demandes
+                                                </a>
+                                                <a href="/maps"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Recherche maps
+                                                </a>
+                                                <a href="/maison-larbin/admin"
+                                                   className="block w-full text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700">
+                                                    Dashborad SuperAdmin
+                                                </a>
+                                            </>
+                                        )}
+
                                         <form method="post" action="/logout">
                                             <button
                                                 type="submit"
@@ -178,14 +239,25 @@ const NavBar = ({user}) => {
                                     </a>
                                 </li>
                                 <hr/>
-                                <li><a href="/maps" className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
-                                {isCadre && (
-                                    <li>
-                                        <a href="/requete/nouvelle" className="hover:opacity-75 transition-opacity px-4 py-2">
-                                            Envoyer une requête
-                                        </a>
-                                    </li>
+
+                                {isEmploye && (
+                                    <li><a href="/maps"
+                                           className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
                                 )}
+
+                                {isCadre && (
+                                    <>
+                                        <li><a href="/maps"
+                                               className="hover:opacity-75 transition-opacity px-4 py-2">Maps</a></li>
+                                        <li>
+                                            <a href="/requete/nouvelle"
+                                               className="hover:opacity-75 transition-opacity px-4 py-2">
+                                                Demandes
+                                            </a>
+                                        </li>
+                                    </>
+                                )}
+
                                 <li>
                                     <a
                                         href="/profil"
