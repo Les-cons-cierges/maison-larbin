@@ -44,12 +44,12 @@ export default function HeroSection() {
 
                     {/* CTA Buttons */}
                     <div className="flex items-center gap-4 flex-wrap">
-                        <button className="bg-bleu text-white text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-gray-900 transition-colors duration-200 shadow-sm">
+                        <a href="/register" className="bg-bleu text-white text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-gray-900 transition-colors duration-200 shadow-sm">
                             Essayer
-                        </button>
-                        <button className="border border-gray-300 text-black text-sm font-semibold px-7 py-3.5 rounded-full hover:border-bleu transition-colors duration-200">
+                        </a>
+                        <a href="#cards" className="border border-gray-300 text-black text-sm font-semibold px-7 py-3.5 rounded-full hover:border-bleu transition-colors duration-200">
                             Voir les tarifs
-                        </button>
+                        </a>
                     </div>
 
                     {/* Divider */}
