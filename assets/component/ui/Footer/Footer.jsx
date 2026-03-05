@@ -18,17 +18,18 @@ const Footer = () => {
 
                     {/* Colonne 2 */}
                     <div className="md:w-[18%] md:pt-8">
+                        <h3 className="mb-2 text-l font-semibold md:text-xl text-bleu underline">Liens</h3>
                         <ul className="space-y-2 text-lg leading-snug md:text-l">
                             <li><a href="/public" className="hover:opacity-80">Accueil</a></li>
-                            <li><a href="/les-palliers" className="hover:opacity-80">Les palliers</a></li>
-                            <li><a href="/services" className="hover:opacity-80">Nos services</a></li>
-                            <li><a href="/abonnements" className="hover:opacity-80">Abonnements</a></li>
+                            <li><a href="/#cards" className="hover:opacity-80">Services</a></li>
+                            <li><a href="/#about" className="hover:opacity-80">À propos</a></li>
+                            <li><a href="/#contact" className="hover:opacity-80">Contact</a></li>
                         </ul>
                     </div>
 
                     {/* Colonne 3 */}
                     <div className="md:w-[22%] md:pt-8">
-                        <h3 className="mb-2 text-l font-semibold md:text-xl">Contact</h3>
+                        <h3 className="mb-2 text-l font-semibold md:text-xl text-bleu underline">Contact</h3>
                         <ul className="space-y-2 text-lg leading-snug md:text-l">
                             <li>Maison Larbin</li>
                             <li>3 rue michel blanc,</li>
@@ -39,7 +40,7 @@ const Footer = () => {
 
                     {/* Colonne 4 */}
                     <div className="md:w-[22%] md:pt-8">
-                        <h3 className="mb-2 text-xl font-semibold md:text-xl">Légal</h3>
+                        <h3 className="mb-2 text-xl font-semibold md:text-xl text-bleu underline">Légal</h3>
                         <ul className="space-y-2 text-lg leading-snug md:text-l">
                             <li><a href="/mentions-legales" className="hover:opacity-80">Mentions légales</a></li>
                             <li><a href="/cgu" className="hover:opacity-80">CGU</a></li>
