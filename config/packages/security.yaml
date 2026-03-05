@@ -32,11 +32,20 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    role_hierarchy:
+        ROLE_EMPLOYE:     [ROLE_USER]
+        ROLE_CADRE:       [ROLE_EMPLOYE]
+        ROLE_DIRECTION:   [ROLE_CADRE]
+        ROLE_ADMIN:       [ROLE_DIRECTION]
+        ROLE_ADMIN_STAFF: [ROLE_ADMIN]
+
     # Note: Only the *first* matching rule is applied
     access_control:
-        - { path: ^/entreprise, roles: ROLE_USER }
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/maison-larbin/admin, roles: ROLE_ADMIN_STAFF }
+        - { path: ^/requete,             roles: ROLE_CADRE }
+        - { path: ^/maps,                roles: ROLE_EMPLOYE }
+        - { path: ^/profil,              roles: ROLE_USER }
+        - { path: ^/entreprise,          roles: ROLE_USER }
 
 when@test:
     security:
