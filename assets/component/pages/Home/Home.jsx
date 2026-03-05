@@ -1,7 +1,6 @@
 import HeroSection from "../../ui/Hero";
 import FeaturesSection from "../../ui/About";
 import PricingCard from "../../ui/Card";
-import ClickSpark from "../../ui/ClickSpark/ClickSpark";
 import ContactSection from "../../ui/Contact";
 
 const Home = ({title, username, cityCount}) => {
