@@ -20,7 +20,7 @@ const Footer = () => {
                     <div className="md:w-[18%] md:pt-8">
                         <h3 className="mb-2 text-l font-semibold md:text-xl text-bleu underline">Liens</h3>
                         <ul className="space-y-2 text-lg leading-snug md:text-l">
-                            <li><a href="/public" className="hover:opacity-80">Accueil</a></li>
+                            <li><a href="/" className="hover:opacity-80">Accueil</a></li>
                             <li><a href="/#cards" className="hover:opacity-80">Services</a></li>
                             <li><a href="/#about" className="hover:opacity-80">À propos</a></li>
                             <li><a href="/#contact" className="hover:opacity-80">Contact</a></li>

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 
+const heroImg = "/image_homepage.jpg";
+
+
 const stats = [
     { label: "Entreprises", value: "PME & ETI" },
     { label: "Secteur", value: "Tertiaire" },
@@ -76,7 +79,7 @@ export default function HeroSection() {
                 >
                     <div className="w-full aspect-[4/5] bg-gray-100 rounded-3xl flex items-center justify-center text-gray-300 text-sm">
                         {/* Replace with <img src="..." alt="..." className="w-full h-full object-cover rounded-3xl" /> */}
-                        <img className="container rounded-3xl" src="https://picsum.photos/200/300.webp" alt=""/>
+                        <img className="container rounded-3xl" src={heroImg} alt="Maison Larbin"/>
                     </div>
                 </div>
 
