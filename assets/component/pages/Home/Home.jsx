@@ -22,10 +22,10 @@ const Home = ({title, username, cityCount}) => {
     return (// ou props
         <div>
             <HeroSection/>
-            <div id="cards" className="min-lg: flex justify-center gap-10 m-5 flex-wrap" itemProp={name}>
-                <PricingCard/>
-                <PricingCard className="border-2 border-black!"/>
-                <PricingCard/>
+            <div id="cards" className="min-lg: flex justify-center gap-10 m-50 flex-wrap" itemProp={name}>
+                <PricingCard employeesLabel="1 à 50 employés" />
+                <PricingCard employeesLabel="50 à 250 employés" className="border-2 border-black!"/>
+                <PricingCard employeesLabel="+250 employés"/>
             </div>
             <FeaturesSection/>
             {/* et props.title ... */}
