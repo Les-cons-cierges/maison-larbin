@@ -83,13 +83,6 @@ export function PricingCard({
                     <span className="text-5xl font-black">{monthlyPrice}€</span>
                     <span className={`text-sm ${subtitleColor}`}>/mois</span>
                 </div>
-                <p className={`text-xs ${annualColor}`}>
-                    Ou {annualPrice.toLocaleString("fr-FR")}€ annuel au lieu de{" "}
-                    <span className={`line-through ${oldPriceColor}`}>
-                        {annualOldPrice.toLocaleString("fr-FR")}€
-                    </span>{" "}
-                    !
-                </p>
             </div>
 
             {/* Divider */}
@@ -99,7 +92,7 @@ export function PricingCard({
             <ul className="flex flex-col gap-3">
                 {features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
-                        <span className={`flex-shrink-0 ${checkColor}`}>
+                        <span className={`shrink-0 ${checkColor}`}>
                             <CheckIcon/>
                         </span>
                         <span className={`text-sm ${featureColor}`}>{feature}</span>
