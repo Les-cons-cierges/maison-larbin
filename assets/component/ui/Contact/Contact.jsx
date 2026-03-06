@@ -137,7 +137,7 @@ export default function ContactSection() {
                             </div>
                             <div className="flex flex-col gap-6">
                                 <InfoItem icon={IconMail}   label="Email"    value="contact@maisonlarbin.fr" />
-                                <InfoItem icon={IconPhone}  label="Téléphone" value="+33 1 23 45 67 89" />
+                                <InfoItem icon={IconPhone}  label="Téléphone" value="+33 2 35 65 65 65" />
                                 <InfoItem icon={IconMapPin} label="Adresse"  value="Rouen, Normandie" />
                             </div>
                         </div>
