@@ -12,9 +12,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
-
+#[IsGranted('ROLE_ADMIN_STAFF')]
 #[AdminDashboard(routePath: '/maison-larbin/admin', routeName: 'admin_maison_larbin')]
 class DashboardMaisonLarbinController extends AbstractDashboardController
 {
