@@ -63,10 +63,10 @@ class ClientUserCrudController extends AbstractCrudController
 
             ChoiceField::new('roles', 'Role')
                 ->setChoices([
-                    'Employe' => 'ROLE_EMPLOYEE',
+                    'Employé' => 'ROLE_EMPLOYE',
                     'Cadre' => 'ROLE_CADRE',
                     'Direction' => 'ROLE_DIRECTION',
-                    'AdminClient' => 'ROLE_ADMINCLIENT',
+                    'Admin' => 'ROLE_ADMIN',
                 ])
                 ->allowMultipleChoices()
                 ->setRequired(true)
