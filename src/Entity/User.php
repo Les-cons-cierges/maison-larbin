@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $now = new \DateTimeImmutable();
         $this->created_at = $now;
         $this->updated_at = $now;
-        $this->roles = ['ROLE_ADMINCLIENT'];
+        $this->roles = ['ROLE_ADMIN'];
     }
 
     public function getId(): ?int
@@ -155,7 +155,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_ADMINCLIENT';
+        $roles[] = 'ROLE_ADMIN';
 
         return array_values(array_unique($roles));
     }

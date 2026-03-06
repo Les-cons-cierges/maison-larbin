@@ -21,7 +21,7 @@ class EntrepriseRegistrationController extends AbstractController
     #[Route('/entreprise/register', name: 'app_entreprise_register')]
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $values = [
             'nom' => '',
