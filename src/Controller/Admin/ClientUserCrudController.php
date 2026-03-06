@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Count;
 
 
+
 class ClientUserCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -62,17 +63,13 @@ class ClientUserCrudController extends AbstractCrudController
                 ->setRequired(true),
 
             ChoiceField::new('roles', 'Role')
-                ->setChoices([
-                    'Employé' => 'ROLE_EMPLOYE',
-                    'Cadre' => 'ROLE_CADRE',
-                    'Direction' => 'ROLE_DIRECTION',
-                    'Admin' => 'ROLE_ADMIN',
-                ])
+                ->setChoices($this->getRoleChoicesForForm())
                 ->allowMultipleChoices()
                 ->setRequired(true)
                 ->setFormTypeOption('constraints', [
                     new Count(min: 1, minMessage: 'Selectionnez un role.'),
                 ]),
+
             DateTimeField::new('created_at', 'Crée le')->hideOnForm(),
             DateTimeField::new('updated_at', 'Mis a jour le')->hideOnForm(),
 
@@ -126,6 +123,7 @@ class ClientUserCrudController extends AbstractCrudController
         $entityInstance->setCreatedAt($now);
         $entityInstance->setUpdatedAt($now);
 
+        $this->assertSubmittedRolesAreAllowed($entityInstance);
         $this->normalizeSingleRole($entityInstance);
 
         parent::persistEntity($entityManager, $entityInstance);
@@ -137,6 +135,7 @@ class ClientUserCrudController extends AbstractCrudController
             return;
         }
 
+        $this->assertSubmittedRolesAreAllowed($entityInstance);
         $this->normalizeSingleRole($entityInstance);
         $entityInstance->setUpdatedAt(new \DateTimeImmutable());
 
@@ -151,5 +150,66 @@ class ClientUserCrudController extends AbstractCrudController
         ));
 
         $user->setRoles(isset($roles[0]) ? [$roles[0]] : []);
+    }
+
+    private const ROLE_LABELS = [
+        'Employe' => 'ROLE_EMPLOYEE',
+        'Cadre' => 'ROLE_CADRE',
+        'Direction' => 'ROLE_DIRECTION',
+        'Admin' => 'ROLE_ADMIN',
+    ];
+
+    private const ABONNEMENTS_AVEC_DIRECTION = ['abonnement_3'];
+
+    private function getCurrentUserAbonnement(): ?string
+    {
+        $currentUser = $this->getUser();
+
+        if (!$currentUser instanceof User) {
+            return null;
+        }
+
+        return $currentUser->getIdEntreprise()?->getTypeAbonnement();
+    }
+
+    private function getAllowedRolesForCurrentUser(): array
+    {
+        $abonnement = $this->getCurrentUserAbonnement();
+
+        $allowed = [
+            'ROLE_EMPLOYEE',
+            'ROLE_CADRE',
+            'ROLE_ADMIN',
+        ];
+
+        if (in_array($abonnement, self::ABONNEMENTS_AVEC_DIRECTION, true)) {
+            $allowed[] = 'ROLE_DIRECTION';
+        }
+
+        return $allowed;
+    }
+
+    private function getRoleChoicesForForm(): array
+    {
+        $allowedRoles = $this->getAllowedRolesForCurrentUser();
+
+        return array_filter(
+            self::ROLE_LABELS,
+            static fn(string $role) => in_array($role, $allowedRoles, true)
+        );
+    }
+    private function assertSubmittedRolesAreAllowed(User $user): void
+    {
+        $submittedRoles = array_values(array_filter(
+            $user->getRoles(),
+            static fn(string $r) => $r !== 'ROLE_USER'
+        ));
+
+        $allowedRoles = $this->getAllowedRolesForCurrentUser();
+        $forbidden = array_diff($submittedRoles, $allowedRoles);
+
+        if (!empty($forbidden)) {
+            throw new AccessDeniedException('Role non autorise pour cet abonnement.');
+        }
     }
 }
