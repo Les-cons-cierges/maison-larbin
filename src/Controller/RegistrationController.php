@@ -36,6 +36,7 @@ final class RegistrationController extends AbstractController
             $plainPassword = (string) $form->get('plainPassword')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
             $user->setAvatar(User::DEFAULT_AVATAR);
+            $user->setRoles(['ROLE_ADMIN']);
 
             $avatarFile = $form->get('avatarFile')->getData();
 
