@@ -5,7 +5,6 @@ import PricingCard from "../../ui/Card";
 import ContactSection from "../../ui/Contact";
 
 const Home = ({title, username, cityCount}) => {
-
     useEffect(() => {
         const hash = window.location.hash;
         if (hash) {
@@ -22,7 +21,7 @@ const Home = ({title, username, cityCount}) => {
     return (// ou props
         <div>
             <HeroSection/>
-            <div id="cards" className="min-lg: flex justify-center gap-10 m-50 flex-wrap" itemProp={name}>
+            <div id="cards" className="m-5 min-lg: flex justify-center gap-10 flex-wrap" itemProp={name}>
                 <PricingCard name="PME" monthlyPrice="1200" features={["Carte interactive", "Réservation directe via la plateforme"]} employeesLabel="1 à 50 employés" />
                 <PricingCard name="ETI" monthlyPrice="3500" subtitle="Idéal pour les moyennes et grandes structures" employeesLabel="50 à 250 employés" className="border-2 border-black!"/>
                 <PricingCard name="GE" monthlyPrice="8000" subtitle="Idéal pour les grandes structures" employeesLabel="+250 employés"/>

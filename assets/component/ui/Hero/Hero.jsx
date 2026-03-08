@@ -31,7 +31,7 @@ export default function HeroSection() {
                 >
                     {/* Heading */}
                     <h1
-                        className="text-6xl md:text-7xl font-black leading-[1.05] tracking-tight text-bleu"
+                        className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight text-bleu"
                     >
                         La conciergerie
                         <br />
@@ -77,7 +77,7 @@ export default function HeroSection() {
                         transform: visible ? "translateY(0)" : "translateY(24px)",
                     }}
                 >
-                    <div className="w-full aspect-[4/5] bg-gray-100 rounded-3xl flex items-center justify-center text-gray-300 text-sm">
+                    <div className="w-full aspect-4/5 bg-gray-100 rounded-3xl flex items-center justify-center text-gray-300 text-sm">
                         {/* Replace with <img src="..." alt="..." className="w-full h-full object-cover rounded-3xl" /> */}
                         <img className="container rounded-3xl" src={heroImg} alt="Maison Larbin"/>
                     </div>
