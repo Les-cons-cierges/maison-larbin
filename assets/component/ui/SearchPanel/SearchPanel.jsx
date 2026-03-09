@@ -1,5 +1,12 @@
 import { useState } from 'react';
 
+/**
+ * Liste de tous les types de lieux supportés par l'API Google Places.
+ * Chaque entrée contient :
+ *  - value : identifiant technique envoyé à l'API
+ *  - label : nom affiché à l'utilisateur
+ *  - emoji : icône associée au type de lieu
+ */
 const PLACE_TYPES = [
     { value: 'restaurant',    label: 'Restaurant',        emoji: '🍽️' },
     { value: 'cafe',          label: 'Café',              emoji: '☕' },
@@ -28,9 +35,14 @@ const PLACE_TYPES = [
     { value: 'car_repair',    label: 'Garage',            emoji: '🔧' },
 ];
 
+// Valeurs min/max du slider de rayon (en mètres)
 const MIN_RADIUS = 200;
 const MAX_RADIUS = 30000;
 
+/**
+ * Raccourcis de rayon prédéfinis affichés sous le slider
+ * pour permettre une sélection rapide sans manipuler le curseur.
+ */
 const QUICK_RADII = [
     { value: 500,   label: '500 m' },
     { value: 1000,  label: '1 km' },
@@ -40,28 +52,49 @@ const QUICK_RADII = [
     { value: 20000, label: '20 km' },
 ];
 
+/**
+ * Composant SearchPanel
+ * Panneau de configuration de la recherche de lieux à proximité.
+ * Permet de choisir un mot-clé, des types de lieux et un rayon.
+ *
+ * Props :
+ *  - onSearch      : fonction appelée à la soumission → reçoit { query, placeTypes, radius }
+ *  - isLoading     : booléen pour désactiver le bouton pendant la recherche
+ *  - onRadiusChange: fonction appelée en temps réel quand le rayon change (pour mettre à jour le cercle sur la carte)
+ */
 const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
-    const [query, setQuery]           = useState('');
-    const [placeTypes, setPlaceTypes] = useState(['restaurant']);
-    const [radius, setRadius]         = useState(2000);
+    const [query, setQuery]           = useState('');              // Mot-clé de recherche libre (ex: "pizza")
+    const [placeTypes, setPlaceTypes] = useState(['restaurant']);  // Types de lieux sélectionnés (au moins 1)
+    const [radius, setRadius]         = useState(2000);            // Rayon en mètres (2km par défaut)
 
+    // ─── Bascule d'un type de lieu ────────────────────────────────────────────
+    // Ajoute le type s'il n'est pas sélectionné, le retire sinon.
+    // Garde au moins 1 type sélectionné en permanence (empêche de tout décocher).
     const toggleType = (value) => {
         setPlaceTypes((prev) =>
             prev.includes(value)
-                ? prev.length === 1 ? prev : prev.filter((v) => v !== value)
+                ? prev.length === 1 ? prev : prev.filter((v) => v !== value) // empêche la liste vide
                 : [...prev, value]
         );
     };
 
+    // ─── Mise à jour du rayon ─────────────────────────────────────────────────
+    // Stocke la nouvelle valeur ET notifie le parent pour mettre à jour
+    // le cercle de rayon affiché sur la carte en temps réel.
     const updateRadius = (val) => { setRadius(val); onRadiusChange?.(val); };
 
+    // ─── Soumission du formulaire ─────────────────────────────────────────────
+    // e.preventDefault() empêche le rechargement de page (comportement HTML par défaut).
     const handleSubmit = (e) => { e.preventDefault(); onSearch({ query, placeTypes, radius }); };
 
+    // ─── Formatage du rayon pour l'affichage ──────────────────────────────────
+    // Convertit les mètres en "500 m", "1 km", "1.5 km" etc.
     const formatRadius = (val) => {
         if (val >= 1000) { const km = val / 1000; return km % 1 === 0 ? `${km} km` : `${km.toFixed(1)} km`; }
         return `${val} m`;
     };
 
+    // Calcule le pourcentage de remplissage du slider pour la couleur dégradée (CSS custom property --pct)
     const pct = ((radius - MIN_RADIUS) / (MAX_RADIUS - MIN_RADIUS)) * 100;
 
     return (
@@ -70,7 +103,7 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
 
-                {/* Mot-clé */}
+                {/* Champ mot-clé libre — optionnel, affine la recherche (ex: "sushi" dans les restaurants) */}
                 <div className="flex flex-col gap-1.5">
                     <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest">
                         Mot-clé (optionnel)
@@ -85,25 +118,28 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                     />
                 </div>
 
-                {/* Types de lieux */}
+                {/* Sélection des types de lieux — badges cliquables avec compteur */}
                 <div className="flex flex-col gap-1.5">
                     <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest flex items-center gap-2">
                         Types de lieux
+                        {/* Badge indiquant combien de types sont sélectionnés */}
                         <span className="bg-orange-employe/20 border border-orange-employe/60 rounded-full px-2 py-0.5
                              text-[0.68rem] text-orange-employe font-bold normal-case tracking-normal">
-              {placeTypes.length} sélectionné{placeTypes.length > 1 ? 's' : ''}
-            </span>
+                            {placeTypes.length} sélectionné{placeTypes.length > 1 ? 's' : ''}
+                        </span>
                     </label>
+                    {/* Zone scrollable pour afficher tous les types sans prendre trop de place */}
                     <div className="flex flex-wrap gap-1.5 max-h-40 md:max-h-32 overflow-y-auto py-0.5
                           [scrollbar-width:thin] [scrollbar-color:--color-orange-employe_transparent]">
                         {PLACE_TYPES.map((t) => {
-                            const active = placeTypes.includes(t.value);
+                            const active = placeTypes.includes(t.value); // ce type est-il sélectionné ?
                             return (
                                 <button
                                     key={t.value}
                                     type="button"
                                     onClick={() => toggleType(t.value)}
                                     title={t.label}
+                                    // Style actif (plein orange) vs inactif (contour discret)
                                     className={`flex items-center gap-1.5 rounded-full text-[0.75rem] font-medium
                               px-2.5 py-1.5 cursor-pointer whitespace-nowrap select-none
                               transition-all duration-150 border
@@ -119,17 +155,22 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                     </div>
                 </div>
 
-                {/* Rayon */}
+                {/* Slider de rayon de recherche */}
                 <div className="flex flex-col gap-1.5">
                     <label className="text-[0.78rem] font-semibold text-orange-employe uppercase tracking-widest">
                         Rayon de recherche
                     </label>
+                    {/* Affichage de la valeur actuelle du rayon en grand */}
                     <div className="flex items-baseline gap-2 bg-bleu-sombre border border-orange-employe/25 rounded-xl px-3.5 py-2 mb-1">
-            <span className="text-2xl font-black text-orange-employe leading-none tracking-tight">
-              {formatRadius(radius)}
-            </span>
+                        <span className="text-2xl font-black text-orange-employe leading-none tracking-tight">
+                          {formatRadius(radius)}
+                        </span>
                         <span className="text-[0.75rem] text-bleu">autour de vous</span>
                     </div>
+                    {/*
+                      Slider HTML natif stylisé via Tailwind.
+                      --pct : variable CSS calculée pour remplir la barre à gauche du pouce en orange.
+                    */}
                     <input
                         type="range"
                         min={MIN_RADIUS} max={MAX_RADIUS} step={100} value={radius}
@@ -143,12 +184,14 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                        [&::-webkit-slider-thumb]:border-bleu-sombre [&::-webkit-slider-thumb]:cursor-pointer
                        [&::-webkit-slider-thumb]:shadow-[0_0_8px_rgba(231,111,81,0.6)]"
                     />
+                    {/* Boutons de sélection rapide du rayon — cliquables en plus du slider */}
                     <div className="flex flex-wrap gap-1.5 mt-2">
                         {QUICK_RADII.map((r) => (
                             <button
                                 key={r.value}
                                 type="button"
                                 onClick={() => updateRadius(r.value)}
+                                // Surbrillance si c'est la valeur actuellement sélectionnée
                                 className={`flex-1 min-w-14.5 rounded-lg text-[0.72rem] font-semibold py-1.5 px-1
                             text-center transition-all duration-150 border cursor-pointer
                             ${radius === r.value
@@ -161,7 +204,7 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                     </div>
                 </div>
 
-                {/* Bouton submit */}
+                {/* Bouton de lancement de la recherche — désactivé pendant le chargement */}
                 <button
                     type="submit"
                     disabled={isLoading}
@@ -170,6 +213,7 @@ const SearchPanel = ({ onSearch, isLoading, onRadiusChange }) => {
                      hover:-translate-y-0.5 active:translate-y-0 cursor-pointer border-none
                      shadow-[0_4px_16px_rgba(231,111,81,0.35)]"
                 >
+                    {/* Texte dynamique selon l'état de chargement */}
                     {isLoading ? '⏳ Recherche en cours…' : `📍 Rechercher dans ${formatRadius(radius)}`}
                 </button>
             </form>
