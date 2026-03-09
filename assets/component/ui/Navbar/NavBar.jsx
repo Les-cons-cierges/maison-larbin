@@ -2,7 +2,6 @@ import {useEffect, useRef, useState} from 'react';
 import '../../../styles/app.css';
 
 const logo = '/logo2.png';
-
 const NavBar = ({user}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -29,11 +28,13 @@ const NavBar = ({user}) => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
+            /* si le click et a l'exterieur du menu ça le ferme */
             if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
                 setIsUserMenuOpen(false);
             }
         };
 
+        {/* fonction quand j'appuie sur échape ça ferme*/}
         const handleEscape = (event) => {
             if (event.key === 'Escape') {
                 setIsUserMenuOpen(false);
@@ -48,6 +49,7 @@ const NavBar = ({user}) => {
             document.removeEventListener('keydown', handleEscape);
         };
     }, []);
+
 
     return (
         <nav
